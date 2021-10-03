@@ -1,0 +1,117 @@
+
+{% extends 'base_cliente.html' %}
+
+{% block content %}
+
+    <div id="principal">
+        <img class="imgprincipal" id="imgprincipal" src="/img/lH2kooyMxb8.png" alt="Imagem principal" onload="trocaImg()">
+        <i class="fas fa-chevron-left" id="setaleft" onclick="clicar()"></i>
+        <i class="fas fa-chevron-right" id="setaright" onclick="clicar2()"></i>     
+    </div> 
+    
+    <main>
+        <section>
+            <h2>Destaques</h2>
+
+            <ul class="container">
+                <li>
+                    <img src="/img/image 9.png" class="img">
+                    <p class="produto-descricao">Espaguete com molho de tomate, muçarela de búfala, azeitona preta e manjericão</p>
+                    <p class="produto-preco">R$ 41,90</p>
+                    <i class="fas fa-cart-plus"></i>
+                </li>
+
+                <li>
+                    <img src="/img/image 6.png" class="img">
+                    <p class="produto-descricao">Ravióle de carne ao molho romana</p>
+                    <p class="produto-preco">R$ 48,50</p>
+                    <i class="fas fa-cart-plus"></i>
+                </li>
+
+                <li>
+                    <img src="/img/image 5.png" class="img">
+                    <p class="produto-descricao">Fettuccine com ragu de costela e cogumelos</p>
+                    <p class="produto-preco">R$ 55,80</p>
+                    <i class="fas fa-cart-plus" id="unico"></i>
+                </li>
+
+                
+                <li>
+                    <img src="/img/image 3.png" class="img">
+                    <p class="produto-descricao" id="ravioli">Ravióli de brie e damasco</p>
+                    <p class="produto-preco">R$ 41,90</p>
+                    <i class="fas fa-cart-plus"></i>
+                </li>
+ 
+                <li>
+                    <img src="/img/image 8.png" class="img">
+                    <p class="produto-descricao" id="penne">Penne al pesto trapanese </p>
+                    <p class="produto-preco">R$ 39,90</p>
+                    <i class="fas fa-cart-plus"></i>
+                </li>
+
+                <li>
+                    <img src="/img/image 7.png" class="img">
+                    <p class="produto-descricao">Conchiglia quatro queijos ao molho siciliano</p>
+                    <p class="produto-preco">R$ 43,90</p>
+                    <i class="fas fa-cart-plus"></i>
+                </li>
+            </ul>
+        </section>
+ 
+        <section>
+            <h2>Sobremesas</h2>
+            <ul class="container">
+                <li>
+                    <img src="/img/image20.png" class="img">
+                    <p class="produto-descricao">Tiramisù. Sobremesa italiana a base de café com chocolate, queijo mascarpone</p>
+                    <p class="produto-preco">R$ 25,00</p>
+                    <i class="fas fa-cart-plus"></i>
+                </li>
+
+                <li>
+                    <img src="/img/image 11.png" class="img">
+                    <p class="produto-descricao">Panacota. Feita originalmente da nata do leite, açúcar, gelatina e frutas vermelhas</p>
+                    <p class="produto-preco">R$ 19,00</p>
+                    <i class="fas fa-cart-plus"></i>
+                </li>
+
+                <li>
+                    <img src="/img/image21.png" class="img">
+                    <p class="produto-descricao">O tradicional Gelato Italiano no sabor morango</p>
+                    <p class="produto-preco">R$ 19,00</p>
+                    <i class="fas fa-cart-plus"></i>
+                </li>
+            </ul>
+        </section> 
+
+        <section>
+            <h2>Bebidas</h2>
+            <ul class="container">
+                <li>
+                    <img src="/img/image 16.png" class="img">
+                    <p class="produto-descricao" id="agua">Água</p>
+                    <p class="produto-preco" id="preco">R$ 5,00</p>
+                    <i class="fas fa-cart-plus" id="carrinhoagua"></i>
+                </li>
+
+                <li>
+                    <img src="/img/image 18.png" class="img">
+                    <p class="produto-descricao" id="coca">Refrigerante: 
+                        Coca-cola</p>
+                    <p class="produto-preco">R$ 7,00</p>
+                    <i class="fas fa-cart-plus"></i>
+                </li>
+
+                <li>
+                    <img src="/img/image 19.png" class="img">
+                    <p class="produto-descricao" id="suco">Suco natural: 
+                        laranja</p>
+                    <p class="produto-preco" id="preco-suco">R$ 9,00</p>
+                    <i class="fas fa-cart-plus"></i>
+                </li>
+            </ul>
+        </section>
+    </main>
+    <script type="text/javascript" src="js/script.js"></script>
+    {% endblock %}

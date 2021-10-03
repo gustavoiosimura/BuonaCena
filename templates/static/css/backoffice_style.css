@@ -1,0 +1,296 @@
+ul.menu{
+    text-align: right;
+}
+
+.caixa {
+    background: #EDE9E9;
+    width: 100%;
+    height: 158px;
+    margin: 0 auto;
+    position: relative;
+    margin: 0 auto;
+}
+
+h1 {
+    width: 100%;
+    height: 158px;
+}
+
+.logo {
+    top: -70px;
+    position: relative;
+}
+
+nav {
+    position: absolute;
+    top: 70px;
+    right: 0px;
+    left: 1000px;
+}
+
+nav li {
+    display: inline;
+    margin: 0 0 0 15px;
+}
+
+nav a {
+    text-transform: uppercase;
+    color:black;
+    font-size: 20px;
+    font-family:'Tenor Sans', sans-serif;
+    text-decoration: none;
+}
+
+nav a:hover {
+    color: #c78c19;
+    text-decoration: underline;
+}
+
+#sair {
+padding-left: 15px;
+font-size: 20px;
+cursor: pointer;
+}
+
+.opcoes {
+    padding-bottom: 20px;
+    padding-top: 30px;
+    text-align: center;
+}
+
+.opcoes #botoes, .opcoes #botoes2, .opcoes #botoes3 {
+    font-family:'Tenor Sans', sans-serif;
+    margin: 0 0 0 13px;
+    border: 1px solid #fcfafa;
+    padding: 12px 20px;
+    border-radius: 5px;
+    background: rgb(250, 250, 250);
+    margin-bottom: 0.2em;
+    box-shadow: 2px 2px 2px #a89292;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.titulo {
+    padding-bottom: 30px;
+}
+
+.cadastro {
+    border: 1px solid #afadad;
+    border-radius: 2px;
+    padding-top: 20px;
+    margin: auto;
+    font-size: 18px;
+    font-family:'Tenor Sans', sans-serif;
+    background: rgb(250, 250, 250);	
+    text-align: center;
+}
+
+.cadastro tr td {
+    padding-top: 15px;
+}
+
+.cadastro form {
+    padding-top: 25px;
+    font-size: 15px;
+}
+
+.campo {
+    padding-left: 75px;
+    text-align: left;
+    margin-bottom: 0.8em;
+}
+
+.campo label {
+    font-family: 'Tenor Sans',sans-serif;
+    display: block;
+    margin-bottom: 0.2em;
+}
+
+.campo input{
+    width: 420px;
+    height: 35px;
+    border: 1px solid #afadad;
+    border-radius: 3px;
+    
+}
+
+.campo select {
+    width: 426px;
+    height: 40px;
+    border: 1px solid #afadad;
+    border-radius: 3px;
+    font-size: 15px;
+    -webkit-appearance: none;
+    -moz-appearance:    none;
+    appearance:         none;
+    background: white url('imagens/seta-baixa.png') 99% 50% no-repeat;
+    background-size: 20px;
+}
+
+.cadastrar {
+    text-align: center;
+    margin-bottom: 1.5em;
+}
+
+.cadastrar input {
+    font-family: 'Tenor Sans',sans-serif;
+    font-size: 15px;
+    margin-bottom: 0.2em;
+    width: 125px;
+    height: 35px;
+    border: 1px solid #afadad;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+strong {
+    color: #861111;
+}
+
+
+#mostrar, #mostrar2 {
+  margin-left: -30px;
+  cursor: pointer;
+}
+
+#ocultar, #ocultar2 {
+  display: none;
+}
+
+@media screen and (max-width: 280px) {
+    body, .cadastro, .campo, .titulo {
+        width: auto;
+        margin-left: 0px;
+    }
+
+    .cadastro {
+        border: none;
+    }
+
+    .caixa {    
+        height: 205px;
+        text-align: center;
+    }
+
+    nav {
+        position: static;
+    }
+
+    .campo input {
+        width: 108px;
+        margin: 0px;
+    }
+
+    .campo select {
+        width: 110px;
+    }
+}
+
+@media screen and (max-width:380px) {
+    
+    body, .cadastro, .campo, .titulo {
+        width: auto;
+        margin-left: 0px;
+    }
+
+    .cadastro {
+        border: none;
+    }
+
+    .caixa {    
+        height: 205px;
+        text-align: center;
+    }
+
+    nav {
+        position: static;
+    }
+
+    .campo input {
+        width: 210px;
+    }
+
+    .campo select {
+        width: 215px;
+    }
+}
+
+@media screen and (min-width: 380px) and (max-width: 499px) {
+    body, .cadastro, .campo, .titulo {
+        width: auto;
+        margin-left: 0px;
+    }
+
+    .cadastro {
+        border: none;
+    }
+
+    .caixa {    
+        height: 205px;
+        text-align: center;
+    }
+
+    nav {
+        position: static;
+    }
+
+    .campo input {
+        width: 245px;
+    }
+
+    .campo select {
+        width: 251px;
+    }
+}
+
+@media screen and (min-width: 750px) and (max-width: 1024px) {
+    body, .campo, .titulo {
+        width: auto;
+        margin-left: 0px;
+    }
+
+    .caixa {    
+        height: 205px;
+        text-align: center;
+    }
+
+    .cadastro { 
+        width: 600px;
+        margin: auto;
+    }
+
+    nav {
+        position: static;
+    }
+
+}
+
+@media screen and (min-width: 500px) and (max-width: 750px) {
+    body, .cadastro, .campo, .titulo {
+        width: auto;
+        margin-left: 0px;
+    }
+
+    .caixa {    
+        height: 205px;
+        text-align: center;
+    }
+
+    .cadastro {
+        width: 420px;
+        margin: auto;
+    }
+
+    nav {
+        position: static;
+    }
+
+    .campo input {
+        width: 262px;
+    }
+
+    .campo select {
+        width: 267px;
+    }
+}

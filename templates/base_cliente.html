@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Cardápio</title>
+    <link rel="stylesheet" href="/css/cardapio.reset.css">
+    <link rel="stylesheet" href="/css/cardapio.css">
+    <link rel="shortcut icon" href="/imgs/logosemfundo2.png" type="image/x-icon">
+    <link href="/fontawesome/css/all.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Tenor+Sans&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1><img src="/img/image.png" alt="Logo do restaurante Buona Cena" class="logo"></h1>
+
+        <div class="caixa">
+            <nav>
+                <div class="hidden">
+                    <label for="pesquisa"></label>
+                    <input type="text" class="pesquisa" id="pesquisa" placeholder="O que você está procurando?">
+                </div>
+                <ul>
+                    <li>
+                        <a href="checkout.html"><i class="fas fa-shopping-cart" id="cart"></i></a>
+                        <i class="fas fa-search" id="search"></i>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <div class="container">
+      {% block content %} 
+      {% endblock %}
+      </div>
+      <script type="text/javascript" src="js/cardapio.js"></script>
+</body>
+<footer style="margin-top:350px;">
+    <center><a href="/login">Painel do Colaborador</a></center>
+  </footer>
+</html>

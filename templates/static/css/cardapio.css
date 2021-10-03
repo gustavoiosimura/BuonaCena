@@ -1,0 +1,1074 @@
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+body {
+    font-family: 'Tenor Sans', sans-serif;
+    width: 100vw;
+    height: 100vh;
+    box-sizing: border-box;  
+}
+
+header { 
+    width: 100vw;
+    background: #EDE9E9;
+    z-index: 10;
+    margin: 0;
+}
+
+h1 {
+    padding: 20px 0 10px 10px;
+    margin: 0;
+    background: no-repeat center;
+    background-size: cover;
+}
+
+.caixa {
+    position: relative;
+    margin: 0;
+    padding: 10px;
+
+}
+
+nav {
+    position: relative;
+    width: auto;
+    height: 0;
+}
+
+.pesquisa {
+    position: relative;
+    width: 25%;
+    top: -4.5em;
+    left: 28em;
+    font-size: 18px;
+    padding: 15px;
+    background: rgba(196, 196, 196, 0.19);
+    text-align: center;
+    border-radius: 5px;
+    text-decoration: none;
+    border-color: rgba(196, 196, 196, 0.19);
+    outline: none;
+    text-align: center;
+
+}
+
+i.fas.fa-search {
+    position: absolute;
+    left: 26em;
+    font-size: 20px;
+    top: -3.3em;
+    opacity: 0.6;
+    cursor: pointer;
+}
+
+i.fas.fa-shopping-cart {
+    position: absolute;
+    left: 44em;
+    font-size: 25px;
+    top: -3em;
+    opacity: 0.8;
+    cursor: pointer;
+}
+
+i.fas.fa-shopping-cart:hover {
+    opacity: 0.6;
+}
+
+.imgprincipal {
+    width: 100%;
+    margin-top: 10em;
+}
+
+i.fas.fa-chevron-left {
+    position: relative;
+    top: -4em;
+    font-size: 35px;
+    padding: 0 8px;
+    left: 0.6em;
+    cursor: pointer;
+
+}
+i.fas.fa-chevron-left:hover {
+    opacity: 0.7;
+}
+
+i.fas.fa-chevron-right{
+    position: relative;
+    top: -4em;
+    font-size: 35px;
+    padding: 0 8px;
+    right: -36em;
+    cursor: pointer;
+} 
+
+i.fas.fa-chevron-right:hover {
+    opacity: 0.7;
+}
+
+h2 {
+    margin: 5px;
+    padding: 20px;
+    font-weight: bold;
+    font-size: 2em;
+}
+
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    flex-direction: row;
+    margin: 8px;
+    width: 100%;
+    
+} 
+.container li {
+    display: flex;
+    flex-wrap: wrap;
+    width: 30%;
+    margin-bottom: 2em;
+    background: #FFFFFF;
+    border: 1px solid rgba(218, 193, 193, 0.81);    
+}
+
+ul {
+    padding: 0;
+    border: 0;
+    margin: 0;
+}
+
+li {
+    list-style-type: none;
+}
+
+.img {
+    width: 150px;
+    height: 110px;
+    padding: 5px;
+}    
+
+p {
+    
+    margin-left: 11em;
+    margin-top: -7em;
+}
+
+.produto-preco {
+    display: flex;
+    margin-left: 11em;
+    margin-top: -1.5em;
+}
+
+i.fas.fa-cart-plus {
+    display: flex;
+    margin-left: 8em;
+    margin-top: -1.5em;
+    cursor: pointer;
+}
+
+i.fas.fa-cart-plus:hover {
+    opacity: 0.7;
+}
+
+#unico {
+    display: flex;
+    margin-left: 22em;
+}
+
+#agua {
+    margin-top: 0.3em;
+    margin-left: 1em;
+}
+
+a, a:hover, a:focus, a:active {
+    text-decoration: none;
+    color: inherit;
+}
+
+
+
+@media screen and (min-width: 320px) and (max-width: 359px) {
+   
+    header { 
+        width: 100vw;
+        margin: 0;
+        padding: 0;
+        height: 85px; 
+    }
+
+    .logo { 
+        width: 8.5em;
+        left: 0.3em;
+        top: 0.8em; 
+        height: auto;       
+    }
+
+    .imgprincipal {
+        width: 100%;
+        height: 85px;
+        margin-top: 5em;
+    }
+
+    i.fas.fa-shopping-cart {
+        position: relative;
+        top: -2.6em;
+        left: 19em;
+        font-size: 15px;
+    }
+
+    i.fas.fa-search {
+        position: relative;
+        top: -0.9em;
+        left: 10.5em;
+        font-size: 12px;
+    }
+
+    .pesquisa {
+        width: 45%;
+        top: 1em;
+        left: 14.5em;
+        font-size: 10px;
+        padding: 6px 6px 6px 15px;
+        text-align: center;
+    }
+
+
+    i.fas.fa-chevron-left {
+        position: relative;
+        top: -3em;
+        font-size: 18px;
+        left: 0.1em;
+        cursor: pointer;
+    }
+
+    i.fas.fa-chevron-right{
+        position: relative;
+        top: -3em;
+        font-size: 18px;
+        left: 14.5em;
+        cursor: pointer;
+    } 
+
+    h2 {
+        margin: 10px 0 0 5px;
+        padding: 0 0 10px 0;
+        font-weight: bold;
+        font-size: 17px;
+    }
+    
+    .container {
+        display: flex;
+        flex-wrap: wrap;
+        margin: 0;
+        width: 100%;
+        flex-direction: column;    
+    } 
+
+    .container li {
+        background: #FFFFFF;
+        width: 100%;
+        border: 1px 0 1px 0 solid rgba(218, 193, 193, 0.81);
+        margin: 0;
+        height: auto;
+        
+    }
+   
+ 
+    .img {
+        width: 6em;
+        height: 5em;
+        padding: 8px;
+        border-radius: 10px;
+    }    
+    
+    p {
+        font-size: 14px;
+        margin-left: 8.5em;
+        margin-top: -6em;
+    }
+    
+    .produto-preco {
+        display: flex;
+        margin-left: 8em;
+        margin-top: -1.5em;
+        font-size: 14px;
+    }
+    
+    i.fas.fa-cart-plus {
+        display: flex;
+        margin-left: 21em;
+        margin-top: -1.5em;
+        cursor: pointer;
+        font-size: 14px;
+    }
+    
+    #unico {
+        display: flex;
+        margin-left: 21em;
+    }
+    
+    #agua {
+        margin-top: 0.8em;
+        margin-left: 1em;
+    }
+    
+    #preco {
+        margin-top: 5.5em;
+        margin-left: -3.5em;
+    }   
+}
+
+
+@media screen and (min-width: 360px) and (max-width: 410px) {
+    
+    header { 
+        width: 100vw;
+        margin: 0;
+        padding: 0;
+        height: 100px;
+    }
+
+    .logo { 
+        width: 10em;
+        left: 0.5em;
+        top: 1em;        
+    }
+
+    .imgprincipal {
+        width: 100%;
+        height: 80px;
+        margin-top: 6.2em;
+    }
+
+    i.fas.fa-shopping-cart {
+        position: relative;
+        top: -1.9em;
+        left: 19em;
+        font-size: 17px;
+    }
+
+    i.fas.fa-search {
+        position: relative;
+        top: -0.3em;
+        left: 11.6em;
+        font-size: 13px;
+    }
+
+    .pesquisa {
+        width: 43%;
+        top: 1.5em;
+        left: 15em;
+        font-size: 11.5px;
+        padding: 6px 6px 6px 18px;    
+    }
+   
+    i.fas.fa-chevron-left {
+        position: relative;
+        top: -3em;
+        font-size: 18px;
+        left: 0.1em;
+        cursor: pointer;
+    }
+
+    i.fas.fa-chevron-right{
+        position: relative;
+        top: -3em;
+        font-size: 18px;
+        left: 17.5em;
+        cursor: pointer;
+    } 
+
+    h2 {
+        margin: 15px 0 0 5px;
+        padding: 0 0 10px 0;
+        font-weight: bold;
+        font-size: 20px;
+    }
+    
+    
+    .container {
+        display: flex;
+        flex-wrap: wrap;
+        margin: 0;
+        width: 100%;
+        flex-direction: column;
+        height: auto; 
+    } 
+
+    .container li {
+        background: #FFFFFF;
+        width: auto;
+        border: 1px 0 1px 0 solid rgba(218, 193, 193, 0.81);
+        margin: 1px;
+        height: auto;
+    }
+    
+    .img {
+        width: 6em;
+        height: 5em;
+        padding: 8px;
+        border-radius: 10px;
+    }    
+    
+    p {
+        font-size: 14px;
+        margin-left: 8em;
+        margin-top: -6em;
+    }
+
+    .produto-preco {
+        display: flex;
+        margin-left: 8em;
+        margin-top: -1.5em;
+        font-size: 14px;
+    }
+    
+    i.fas.fa-cart-plus {
+        display: flex;
+        margin-left: 24em;
+        margin-top: -1.5em;
+        cursor: pointer;
+        font-size: 14px;
+    }
+    
+    #unico {
+        display: flex;
+        margin-left: 24.5em;
+    }
+    
+    #agua {
+        margin-top: 0.8em;
+        margin-left: 1em;
+    }
+    
+    #preco {
+        margin-top: 5.5em;
+        margin-left: -3.5em;
+    }
+
+    #suco {
+        margin-top: 1em;
+        margin-left: 0.5em;
+    }
+}
+
+@media screen and (min-width: 400px) and (max-width: 441px) {
+    
+    header { 
+        width: 100vw;
+        margin: 0;
+        padding: 0;
+        height: 100px;  
+    }
+
+    .logo {
+        position: fixed;
+        width: 10em;
+        left: 0.5em;
+        top: 1.1em;        
+    }
+
+    .imgprincipal {
+        width: 100%;
+        height: 90px;
+        margin-top: 6.2em;
+    }
+
+    i.fas.fa-shopping-cart {
+        position: relative;
+        top: -0.3em;
+        left: 19.5em;
+        font-size: 19px;
+    }
+
+    i.fas.fa-search {
+        position: relative;
+        top: -0.4em;
+        left: 10.4em;
+        font-size: 15px;
+    }
+  
+    .pesquisa {
+        width: 42%;
+        top: 1.5em;
+        left: 15.5em;
+        font-size: 11.6px;
+        padding: 6px 2px 6px 20px;
+    }
+
+    i.fas.fa-chevron-left {
+        position: relative;
+        top: -3em;
+        font-size: 18px;
+        left: 0.1em;
+    }
+
+    i.fas.fa-chevron-right{
+        position: relative;
+        top: -3em;
+        font-size: 18px;
+        left: 20em;
+    } 
+
+    h2 {
+        margin: 15px 0 0 5px;
+        padding: 0 0 10px 0;
+        font-weight: bold;
+        font-size: 18px;
+    }
+    
+    
+    .container {
+        display: flex;
+        flex-wrap: wrap;
+        margin: 0;
+        width: 100%;
+        flex-direction: column;
+        height: auto;    
+    }
+
+    .container li {
+        width: auto;
+        border: 1px 0 1px 0 solid rgba(218, 193, 193, 0.81);
+        margin: 1px;
+        height: auto;
+    }
+    
+    .img {
+        width: 5.7em;
+        height: 5em;
+        padding: 8px;
+        border-radius: 10px;
+    }    
+    
+    p {
+        font-size: 14px;
+        margin-left: 7.5em;
+        margin-top: -6em;
+        text-align: justify;
+    }
+    
+   
+    .produto-preco {
+        display: flex;
+        margin-left: 8em;
+        margin-top: -1.5em;
+        font-size: 14px;
+    }
+    
+    i.fas.fa-cart-plus {
+        display: flex;
+        margin-left: 27em;
+        margin-top: -1.5em;
+        font-size: 14px;
+    }
+    
+    #unico {
+        display: flex;
+        margin-left: 27em;
+    }
+    
+    #agua {
+        margin-top: 0.8em;
+        margin-left: 0.5em;
+    }
+    
+    #preco {
+        margin-top: 5.5em;
+        margin-left: -3.5em;
+    }
+    #ravioli {
+        margin-left: 0.1em;
+        margin-top: 1em;
+    }
+
+    #penne {
+        margin-left: 0.1em;
+        margin-top: 1em;
+    }
+
+    #preco-suco {
+        margin-top: 5.5em;
+        margin-left: -9em;
+    }
+
+    #coca {
+        margin-top: 1em;
+        margin-left: 0.5em;
+    }
+
+    #suco {
+        margin-top: 1em;
+        margin-left: 0.5em;
+    }
+}
+
+
+@media screen and (min-width: 540px ) and (max-width: 719px) {
+    header { 
+        width: 100vw;
+        height: 110px;
+        margin: 0;
+    }
+
+    .logo {
+        position: fixed;
+        width: 11em;
+        left: 0.7em;
+        top: 1em;        
+    }
+
+    .imgprincipal {
+        width: 100%;
+        height: 140px;
+        margin-top: 6.4em;
+    }
+
+    i.fas.fa-shopping-cart {
+        position: relative;
+        top: -0.7em;
+        left: 21em;
+        font-size: 22px;
+    }
+
+    i.fas.fa-search {
+        position: relative;
+        top: -0.8em;
+        left: 10.2em;
+        font-size: 18px;
+    }
+
+    .pesquisa {
+        position: relative;
+        top: 1em;
+        width: 39%;
+        padding: 7px 10px 7px 12px;
+        left: 15em;
+        font-size: 14px;
+        text-align: right;
+    }
+
+    
+    i.fas.fa-chevron-left {
+        position: relative;
+        top: -4em;
+        font-size: 20px;
+        left: 0.1em;
+    }
+
+    i.fas.fa-chevron-right{
+        position: relative;
+        top: -4em;
+        font-size: 20px;
+        left: 23.5em;
+    } 
+
+    h2 {
+        margin: 15px 0 0 5px;
+        padding: 0 0 10px 0;
+        font-weight: bold;
+        font-size: 20px;
+    }
+    
+    .container {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        width: 100%;
+        margin: 0;  
+    } 
+
+    .container li {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        width: auto;
+        margin-bottom: 1em;
+        margin: 10px;
+    }
+ 
+    .img {
+        width: 8em;
+        height: 7em;
+        padding: 8px;
+        border-radius: 12px;
+    }    
+    
+    p {
+        font-size: 16px;
+        margin-left: 9em;
+        margin-top: -7.2em;
+        text-align: left;
+    }
+    
+    .produto-preco {
+        display: flex;
+        margin-left: 9em;
+        margin-top: -1.5em;
+        font-size: 16px;
+    }
+    
+    i.fas.fa-cart-plus {
+        position: relative;
+        left: -1em;
+        margin-top: -1.5em;
+        font-size: 14px;
+    }
+    
+    #unico {
+        display: flex;
+        margin-left: 7.9em;
+    }
+    
+    #agua {
+        position: relative;
+        left: -9em;
+    }
+
+    #ravioli {
+        position: relative;
+        font-size: 16px;
+        left: -11em;
+        margin-top: 1em;
+    }
+
+    #penne {
+        position: relative;
+        font-size: 16px;
+        left: -11em;
+        margin-top: 1em;
+    }
+
+    #agua {
+        position: relative;
+        left: -4em;
+        margin-top: 1em;
+    }
+
+    #coca {
+        position: relative;
+        left: -12em;
+        margin-top: 1em;
+    }
+
+    #suco {
+        position: relative;
+        left: -13.5em;
+        margin-top: 1em;
+    }
+    
+    #carrinhoagua {
+        position: relative;
+        left: 27em;
+        margin-top: -1.5em;
+        font-size: 14px;
+    }
+
+    #preco {
+        position: relative;
+        left: -19.4em;
+        margin-top: 6.5em;
+    }
+}
+
+
+
+@media screen and (min-width: 720px) and (max-width: 1023px) {
+  
+    header { 
+        width: 100vw;
+        margin: 0;
+        padding: 0;
+        height: 100px;
+       
+    }
+
+    .logo {
+        position: fixed;
+        width: 10em;
+        left: 1.2em;
+        top: 1em;        
+    }
+
+    .imgprincipal {
+        width: 100vw;
+        height: auto;
+        margin-top: 6.2em;
+    }
+
+    i.fas.fa-shopping-cart {
+        position: relative;
+        top: -1.5em;
+        left: 35em;
+        font-size: 18px;
+    }
+
+    i.fas.fa-search {
+        position: relative;
+        top: -1.1em;
+        left: 13em;
+        font-size: 18px;
+    }
+
+    .pesquisa {
+        position: relative;
+        top: 0.2em;
+        width: 35%;
+        padding: 7px;
+        left: 18em;
+        font-size: 14px;
+    }
+
+    i.fas.fa-chevron-left {
+        position: relative;
+        top: -4.5em;
+        font-size: 18px;
+        left: 0.1em;
+    }
+
+    i.fas.fa-chevron-right{
+        position: relative;
+        top: -4.5em;
+        font-size: 18px;
+        left: 39em;
+    } 
+
+    h2 {
+        margin: 15px 0 0 5px;
+        padding: 0 0 10px 0;
+        font-weight: bold;
+        font-size: 20px;
+    }
+    
+    
+    .container {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        width: 100%;
+        margin: 0;
+        
+        
+    } 
+    .container li {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        width: 33%;
+        margin-bottom: 1em;
+        background: #FFFFFF;
+        border: 1px solid rgba(218, 193, 193, 0.81);    
+    }
+ 
+    .img {
+        width: 5em;
+        height: 5em;
+        padding: 8px;
+        border-radius: 10px;
+    }    
+    
+    p {
+        font-size: 13px;
+        margin-left: 7.5em;
+        margin-top: -7.2em;
+        text-align: left;
+    }
+    
+    .produto-preco {
+        display: flex;
+        margin-left: 7em;
+        margin-top: -1.5em;
+        font-size: 14px;
+    }
+    
+    i.fas.fa-cart-plus {
+        position: relative;
+        left: 7.3em;
+        margin-top: -1.5em;
+        font-size: 14px;
+    
+    }
+    
+    #unico {
+        display: flex;
+        margin-left: 7.8em;
+    }
+    
+    #agua {
+        position: relative;
+        left: -9em;
+    }
+}
+
+@media screen and (min-width:786px) and (max-width: 905px) {
+    #unico { 
+        position: relative;
+        left: 9em;
+    }
+
+    i.fas.fa-chevron-right{
+       position: relative;
+       left:42em;
+    
+    } 
+}
+
+@media screen and (min-width:1024px) and (max-width: 1200px) {
+
+    header { 
+        width: 100vw;
+        margin: 0;
+        padding: 0;
+        height: 123px;
+       
+    }
+
+    .logo {
+        position: fixed;
+        width: 12em;
+        left: 1.2em;
+        top: 1.4em;        
+    }
+
+    .imgprincipal {
+        margin-top: 6.2em;
+    }
+
+    i.fas.fa-shopping-cart {
+        position: relative;
+        top: -0.8em;
+        left: 35em;
+        font-size: 24px;
+    }
+
+    i.fas.fa-search {
+        position: relative;
+        top: -0.7em;
+        left: 16em;
+        font-size: 20px;
+    }
+
+    .pesquisa {
+        position: relative;
+        top: 1.1em;
+        width: 28%;
+        padding: 10px;
+        left: 21em;
+        font-size: 16px;
+    }
+
+    i.fas.fa-chevron-left {
+        position: relative;
+        top: -3.5em;
+        font-size: 25px;
+        left: 0.1em;
+    }
+
+    i.fas.fa-chevron-right {
+        position: relative;
+        top: -3.5em;
+        font-size: 25px;
+        left: 38em;
+    
+    } 
+
+    h2 {
+        margin: 15px 0 0 5px;
+        padding: 0 0 10px 0;
+        font-weight: bold;
+        font-size: 20px;
+    }
+    
+    
+    .container {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        width: 100%;
+        margin: 0;
+        
+        
+    } 
+    .container li {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        width: 33%;
+        margin-bottom: 1em;
+        background: #FFFFFF;
+        border: 1px solid rgba(218, 193, 193, 0.81);
+    
+        
+    }
+ 
+    .img {
+        width: 6em;
+        height: 5em;
+        padding: 5px;
+        border-radius: 10px;
+    }    
+    
+    p {
+        font-size: 14px;
+        margin-left: 7.5em;
+        margin-top: -6em;
+        text-align: left;
+    }
+    
+    .produto-preco {
+        display: flex;
+        margin-left: 8em;
+        margin-top: -1.5em;
+        font-size: 14px;
+    }
+    
+    i.fas.fa-cart-plus {
+        position: relative;
+        left: -1em;
+        margin-top: -1.5em;
+        font-size: 14px;
+    
+    }
+    
+    #unico {
+        display: flex;
+        margin-left: 2em;
+    }
+    #agua {
+        position: relative;
+        left: -1.3em;
+    }
+
+    #preco {
+        position: relative;
+        margin-top: 5em;
+        left: -12em;
+    }
+
+    #carrinhoagua {
+        position: relative;
+        left: 15.5em;
+    }
+}   
+
+@media screen and (min-width:1440px) {
+    i.fas.fa-chevron-right {
+        position: relative;
+        top: -6em;
+        font-size: 25px;
+        left: 53em;
+    
+    } 
+
+    i.fas.fa-cart-plus {
+        position: relative;
+        left: 3.3em;
+        margin-top: -1.5em;
+        font-size: 14px;
+    
+    }
+    
+}

@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<table class="table table-striped mt-3">
+  <tbody>
+    <th>
+      <td>
+        Nome
+      </td>
+      <td>
+        E-mail
+      </td>
+      <td>
+        Cargo
+      </td>
+      <td>
+        Contato
+      </td>
+      <td>
+      </td>
+    </th>
+  {% for user in users %}
+  <tr>
+    <td>
+      {{ user.id }}     
+    </td>
+    <td>
+      {{ user.name }}
+    </td>
+    <td>
+      {{ user.email }}
+    </td>
+    <td>
+      {{ user.cargo }}
+    </td>
+    <td>
+      {{ user.celular }}
+    </td>
+    <td>
+      <a class="btn btn-danger btn-sm" href="{{ url_for('delete', id=user.id) }}">
+        <i class="fa fa-trash" aria-hidden="true"></i>
+      </a>
+    </td>
+  </tr>
+  {% endfor %}
+</tbody>
+</table>
+{% endblock %}
+

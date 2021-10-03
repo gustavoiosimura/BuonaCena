@@ -1,0 +1,338 @@
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    min-width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Tenor Sans', sans-serif;
+    margin: auto;
+}
+
+#telaLogin {
+    position: relative;
+    width: 387px;
+    height: 388px;
+    top: 12.5em;
+    left: 11.4em;
+    transform: translate(-50%, -50%);
+    opacity: 0.9;
+    background: rgba(196, 196, 196, 0.65);
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+  
+}
+
+#fundo {
+    background-image: url(../img/italian-pasta-close-up-on-background-GDZXE2X.png);
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    
+}
+
+form {
+    margin: 40px 0;
+ }
+
+form input {
+    display: block;
+}
+
+.imglogin {
+    position: absolute;
+    width: 60%;
+    height: 20%;
+    left: 4.1em;
+    top: 1.3em;
+  
+    
+
+}
+
+p {
+    position: relative;
+    margin-top: 6rem;
+    padding: 0;
+    font-size: 18px;
+    text-align: center;
+    top: 0;
+    margin-bottom: 2.6em;
+}
+
+
+input:focus {
+    
+    border: 0 none;
+    outline: 0;
+}
+
+.formlogin {
+    position: relative;
+    top: -4.5em;
+    width: 20em;
+    height: 2.7em;
+    margin-top: 0;
+    margin-bottom: -5em;
+    border-radius: 3px;
+    border: 0;
+    justify-content: center;
+    margin:0px 0px 0px -18px;
+    left: 2rem;
+    padding: 0 8px;
+}
+
+i#ocultar {
+    line-height: 0.7 !important;
+}
+
+i#mostrar {
+    line-height: 0.7 !important;
+}
+
+.fas {
+    width: 1.5em;
+    position: absolute;
+    right: 2.9em;
+    top: 14.1em;
+    cursor: pointer;
+}
+
+.btn {
+    position: relative;
+    top: -3rem;
+    font-style:normal;
+    font-size: 18px;
+    color:rgba(0, 0, 0, 0.74);
+    background-color: rgba(0, 0, 0, 0.21);
+    margin-left: 4.6em;
+    width: 10em;
+    border: none;
+    transition: 1s background;
+    padding: 9px 0 9px 0;
+    border-radius: 6px;
+}
+
+.btn:hover {
+    background: rgba(0, 0, 0, 0.25);
+}
+
+
+
+
+@media screen and (max-width: 320px) {
+    #telaLogin {
+        position: absolute;
+        width: auto;
+        height: 58%;
+        top: 17em;
+        left: 10em;
+        
+    }
+    .imglogin {
+        width: auto;
+        left: 3.2em;
+        height: 18%;
+    }
+    p {
+        position: absolute;
+        font-size: 16px;
+        top: 0;
+        text-align: center;
+        left: 2.5em;
+    }
+
+    #idfuncionario {
+        width: 100%;
+        top: 2.4em;
+        left: 1.3em;
+        font-size: 14px;
+
+    }  
+    
+    #senha {
+        width: 100%;
+        top: 2.6em;
+        margin-top: -1em;
+        left: 1.3em;
+        font-size: 14px;
+    }    
+
+    .fas {
+        position: absolute;
+        margin-top: -2.3em;
+        width: auto;
+        right: 2em;
+
+
+    }
+    .btn {
+        top: 4rem;
+        padding: 7px 0 7px 0;
+        font-size: 16px;
+        left: -2.3em;
+    }
+}
+@media screen and (min-width: 321px) and (max-width: 360px) {
+    #telaLogin {
+       width: auto;
+       margin-left: -0.1rem;
+       margin-bottom: -2.9em;
+       margin-right: 5.5em;
+       top: 9em;
+       height: 22em;
+      
+       
+    }
+
+    .imglogin {
+        width: auto;
+        left: 2.2em;
+        right: 18%;
+        
+    }
+
+    p {
+        font-size: 16px;
+    }
+
+    .fas {
+        right: 2em;
+        top: 13.6em;
+        width: auto;
+    }
+
+    #idfuncionario, #senha {
+        margin-left: -2.3em;
+        width: 100%;   
+        padding: 18px 5px 18px 5px;
+        font-size: 14px;   
+        margin-bottom: 0;     
+    }
+
+    .btn {
+        position: relative;
+        left: -2em;
+        font-size: 16px;
+        top: -2.5em;
+    }    
+}    
+
+@media screen and (min-width: 361px) and (max-device-width: 480px) {
+
+    #telaLogin {
+        position: relative;
+        width: auto;
+        top: 8em;
+        left: 8.5em;
+        height: 23em;
+        
+    }
+
+    .imglogin {
+        top: 1.5em;
+        width: auto;
+        left: 2.2em;
+        height: 18%;
+    }    
+
+    p {
+        font-size: 16px;
+    }
+    #idfuncionario, #senha {
+        width: 100%;
+        left: 1.3em;
+        padding: 10px 8px;
+        font-size: 14px;
+    }
+
+    .fas {
+        right: 1.9em;
+        width: auto;
+        top: 13.7em;
+    }    
+
+    .btn {
+        left: -2.4em;
+        font-size: 16px;
+        margin-top: 0.5em;
+    }
+    
+}    
+ 
+@media screen and (min-width: 481px) and (max-width: 768px) {
+    #telaLogin {
+        position: relative;
+        width: auto;
+        top: 13em;
+        left: 8.5em;
+       
+    }
+    
+    .imglogin {
+        width: auto;
+        left: 2.2em;
+        height: 18%;
+        top: 1.5em;
+       
+    }
+    p {
+        font-size: 16px;   
+        
+    }    
+    #idfuncionario, #senha {
+        width: 100%;
+        left: 1.2em;
+        font-size: 14px;
+        padding: 1-px 5px 10px 5px;
+    }
+
+    .fas {
+        width: auto;
+        top: 13.7em;
+        left: 14em;
+    }
+
+    .btn {
+        left: -2.3em;
+        font-size: 16px;
+        top: -2.5em;
+    }
+}
+
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+    #telaLogin {
+        position: relative;
+        width: auto;
+        left: 10em;  
+    }
+
+    .imglogin {
+
+        left: 2.4em;
+        width: auto;
+        height: 18px;
+    }
+
+    p {
+        font-size: 18px;
+    }
+    #idfuncionario, #senha {
+        width: 100%;
+        left: 6.3%;
+    }
+    
+    .fas {
+        right: 1.9em;
+    }
+
+    .btn {
+        left: -1.9em;
+    }
+}

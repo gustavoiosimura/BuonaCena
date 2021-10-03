@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/css/backoffice_style.css" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="/css/reset.css" media="screen"/>
+    <link rel = "preconnect" href = "https://fonts.googleapis.com">
+    <link href = "https: //fonts.googleapis.com/css2? family = Tenor + Sans & display = swap "rel =" stylesheet ">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.min.js"></script>
+    <title>Buona Cena - Cadastro</title>
+</head>
+<body>
+    <header>
+       <div class="caixa">
+            <h1><img src="/img/logo-buona-cena.png" class="logo" width="300" height="300"></h1> 
+            {% include 'nav_backoffice.html' %}
+        </div>
+    </header>
+    <div class="container">
+      {% block content %} 
+      {% endblock %}
+      </div>
+</body>
+<footer style="margin-top:350px;">
+    <center><a href="/login">Painel do Colaborador</a></center>
+  </footer>
+</html>
