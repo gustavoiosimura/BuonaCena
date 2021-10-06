@@ -9,6 +9,12 @@
 
 {% block content %}
 <script>
+     function tabFuncionarios(){
+        document.getElementById("ListaDeProdutos").style.display = "none";
+        document.getElementById("CadastroDeFuncionarios").style.display = "none";
+        document.getElementById("ListaDeFuncionarios").style.display = "block";
+        document.getElementById("CadastroDeProdutos").style.display = "none";
+    }
     function AdicionarUsuarios(){
         document.getElementById("ListaDeFuncionarios").style.display = "none";
         document.getElementById("CadastroDeFuncionarios").style.display = "block";
@@ -20,7 +26,15 @@
     function tabProdutos(){
         document.getElementById("ListaDeFuncionarios").style.display = "none";
         document.getElementById("CadastroDeFuncionarios").style.display = "none";
+        document.getElementById("ListaDeProdutos").style.display = "block";
+    }
+    function AdicionarProdutos(){
+        document.getElementById("ListaDeProdutos").style.display = "none";
         document.getElementById("CadastroDeProdutos").style.display = "block";
+    }
+    function ListaDeProdutos(){
+        document.getElementById("ListaDeProdutos").style.display = "block";
+        document.getElementById("CadastroDeProdutos").style.display = "none";
     }
 </script>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
@@ -28,11 +42,11 @@
   <link rel="stylesheet"
      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <div class="opcoes">
-        <button id="botoes" onclick="clicar()">Funcionários</button>
+        <button id="botoes" onclick="tabFuncionarios()">Funcionários</button>
         <button id="botoes2" onclick="tabProdutos()">Produto</button>
         <button id="botoes3" onclick="clicar3()">Atualizar</button> 
     </div>
-    <div class="cadastro" style="width: 70%" id="ListaDeFuncionarios">
+    <div class="cadastro" style="width: 85%" id="ListaDeFuncionarios">
         <table class="table table-striped mt-3">
             <tbody>
             <th>
@@ -127,7 +141,7 @@
         </form>
     </div> 
     <div id="CadastroDeProdutos" style="display:none;">   
-        <form class="cadastro" style="width: 50%;" action="" method="POST">
+        <form class="cadastro" style="width: 50%;" action="{{ url_for('registerCardapio') }}" method = "POST" enctype = "multipart/form-data">
               <p class="titulo">
                   <a onclick=""><i style="color:#F64B39" class="fas fa-list"></i></a>  CADASTRO DE PRODUTO
               </p>
@@ -137,8 +151,8 @@
                   <input type="text" name="nome" id="nome" required>
                   </div>
                   <div class="campo">
-                      <label for="tipo">Tipo</label>
-                      <input type="text" name="tipo" id="tipo">
+                      <label for="tipo">Tipo<strong>*</strong></label>
+                      <input type="text" name="tipo" id="tipo" required>
                   </div>
                   <div class="campo">
                       <label for="valor">Valor<strong>*</strong></label>
@@ -148,12 +162,67 @@
                     <label for="descricao">Descrição<strong>*</strong></label>
                     <input type="text" name="descricao" id="descricao" required>
                 </div> 
+                <!--<div class="campo">
+                    <label for="upload">Thumbnail</label>
+                    <input type="text" name="thumb" id="thumb" required>
+                </div> -->
+                <div class="campo">
+                    <label for="descricao">Foto<strong></strong></label>
+                    <input type="file" name="thumb" id="thumb" required>
+                </div> 
                   <div class="cadastrar">
                       <input type="submit" name="Cadastrar" value="CADASTRAR">
                   </div>
               </fieldset>
           </form>
       </div> 
+      <div class="cadastro" style="width: 70%;display:none;" id="ListaDeProdutos">
+        <table class="table table-striped mt-3">
+            <tbody>
+            <th>
+                <td>
+                Item
+                </td>
+                <td>
+                Tipo
+                </td>
+                <td>
+                Valor
+                </td>
+                <td>
+                Foto
+                </td>
+                <td style="color: rgb(0, 161, 35);">
+                    <a onclick="AdicionarProdutos()"><i class="fas fa-folder-plus"></i></a>
+                </td>
+            </th>
+            {% for cardapio in cardapios %}
+            <tr>
+                <td>
+                    {{ cardapio.id }}     
+                </td>
+                <td>
+                    {{ cardapio.nome }}
+                </td>
+                <td>
+                    {{ cardapio.tipo }}
+                </td>
+                <td>
+                    {{ cardapio.valor }}
+                </td>
+                <td>
+                    <img style="width: 50px;" src="/uploads/{{ cardapio.thumb }}">
+                </td>
+                <td>
+                    <a class="btn btn-danger btn-sm" href="{{ url_for('delete_cardapio', id=cardapio.id) }}">
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                    </a>
+                </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+        </table>
+    </div>
         </div>
     &nbsp;
 </main>

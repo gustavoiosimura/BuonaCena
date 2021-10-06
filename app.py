@@ -3,16 +3,30 @@ from flask import Flask, render_template, redirect, request, url_for, flash
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin, login_required, login_user, logout_user
 from werkzeug.security import generate_password_hash, check_password_hash
+from flask_migrate import Migrate 
+from werkzeug.utils import secure_filename
+import urllib.request
+import os
 
+UPLOAD_FOLDER = '/templates/static/img'
+ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
 app = Flask(__name__,
             static_url_path='', 
             static_folder='templates/static',
             template_folder='templates')
+
+UPLOAD_FOLDER = 'templates/static/uploads/'
 app.config["SECRET_KEY"] = 'secret'
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///app.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['MAX_CONTENT_LENGTH'] = 16 * 1000 * 1000
+
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 db = SQLAlchemy(app)
+migrate = Migrate(app, db)
 login_manager = LoginManager(app)
 
 
@@ -41,6 +55,7 @@ class Cardapio(db.Model):
     tipo = db.Column(db.String(84), nullable=False)
     valor = db.Column(db.DECIMAL(10,2), nullable=False)
     descricao = db.Column(db.String(120))
+    thumb = db.Column(db.String(240))
     
 
     def __str__(self):
@@ -59,13 +74,15 @@ class Profile(db.Model):
 @app.route("/")
 def index():
     users = User.query.all() # Select * from users; 
-    return render_template("index.html", users=users)
+    cardapios = Cardapio.query.all()
+    return render_template("index.html", users=users, cardapios=cardapios)
 
 @app.route("/cadastros")
 @login_required
 def cadastros():
     users = User.query.all() # Select * from users; 
-    return render_template("cadastros.html", users=users)
+    cardapios = Cardapio.query.all() # Select * from users; 
+    return render_template("cadastros.html", users=users, cardapios=cardapios)
 
 @app.route("/pedidos")
 @login_required
@@ -91,6 +108,14 @@ def delete(id):
 
     return redirect("/cadastros")
 
+@app.route("/cardapio/delete/<int:id>")
+def delete_cardapio(id):
+    cardapio = Cardapio.query.filter_by(id=id).first()
+    db.session.delete(cardapio)
+    db.session.commit()
+
+    return redirect("/cadastros")
+
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
@@ -109,6 +134,11 @@ def register():
 
     return render_template("cadastros.html")
 
+@app.route('/cart/<int:productid>', methods=['POST'])
+def add_to_cart(productid): 
+
+    return render_tempate('index.html', product=products)
+
 @app.route("/register_cardapio", methods=["GET", "POST"])
 def registerCardapio():
     if request.method == "POST":
@@ -116,7 +146,17 @@ def registerCardapio():
         cardapio.nome = request.form["nome"]
         cardapio.tipo = request.form["tipo"]
         cardapio.valor = request.form["valor"]
-        cardapio.descricao = request.form["descricao"] 
+        cardapio.descricao = request.form["descricao"]  
+        file = request.files['thumb']
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            cardapio.thumb = filename
+            #print('upload_image filename: ' + filename)
+            flash('Upload realizado com sucesso')
+        else:
+            flash('Apenas permitimos os seguintes formatos: png, jpg, jpeg, gif')
+            return redirect(request.url)
 
         db.session.add(cardapio)
         db.session.commit()
