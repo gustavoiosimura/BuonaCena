@@ -83,7 +83,7 @@
             <td>
                 {{ user.celular }}
             </td>
-            <td>
+            <td>  
                 <a class="btn btn-danger btn-sm" href="{{ url_for('delete', id=user.id) }}">
                 <i class="fa fa-trash" aria-hidden="true"></i>
                 </a>
@@ -151,9 +151,16 @@
                   <input type="text" name="nome" id="nome" required>
                   </div>
                   <div class="campo">
-                      <label for="tipo">Tipo<strong>*</strong></label>
-                      <input type="text" name="tipo" id="tipo" required>
-                  </div>
+                    <label for="tipo">Tipo<strong>*</strong></label>
+                    <select id="tipo" name="tipo">
+                </div>
+                  <div class="campo">
+                    <option selected disabled value="">Selecione</option>
+                    <option value="bebidas">bebidas</option>
+                    <option value="pratos">pratos</option>
+                    <option value="sobremesas">sobremesas</option>
+                    </select>
+                    </div>
                   <div class="campo">
                       <label for="valor">Valor<strong>*</strong></label>
                       <input type="text" name="valor" id="valor" required>
