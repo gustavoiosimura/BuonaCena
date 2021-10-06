@@ -411,11 +411,7 @@ a, a:hover, a:focus, a:active {
         border-radius: 10px;
     }    
     
-    p {
-        font-size: 14px;
-        margin-left: 8em;
-        margin-top: -6em;
-    }
+      
 
     .produto-preco {
         display: flex;
@@ -541,13 +537,7 @@ a, a:hover, a:focus, a:active {
         padding: 8px;
         border-radius: 10px;
     }    
-    
-    p {
-        font-size: 14px;
-        margin-left: 7.5em;
-        margin-top: -6em;
-        text-align: justify;
-    }
+     
     
    
     .produto-preco {
@@ -694,14 +684,7 @@ a, a:hover, a:focus, a:active {
         padding: 8px;
         border-radius: 12px;
     }    
-    
-    p {
-        font-size: 16px;
-        margin-left: 9em;
-        margin-top: -7.2em;
-        text-align: left;
-    }
-    
+     
     .produto-preco {
         display: flex;
         margin-left: 9em;
