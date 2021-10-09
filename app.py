@@ -96,6 +96,13 @@ def unique(id):
     user = User.query.get(id)
     return render_template("user.html", user=user)
 
+@app.route("/buscar", methods=['GET']) 
+def buscar():
+    query = request.args.get("query") # here query will be the search inputs name
+    cardapios = Cardapio.query.filter(Cardapio.nome.contains(query))
+    cardapios = Cardapio.query.filter(Cardapio.nome.contains(query)).all()
+    return render_template("buscar.html", cardapios=cardapios, query=query)
+
 @login_manager.unauthorized_handler
 def unauthorized_callback():
     return redirect('/login')

@@ -1,0 +1,17 @@
+
+{% extends 'base_cliente.html' %}
+
+{% block content %}  
+<h2>Você buscou por <span style="color:#FF4932;">{{ query }}</span></h2>
+<ul class="container" style="margin-top: 50px;">  
+{% for cardapio in cardapios %}  
+            <li style=" margin-left:20px;">
+                <img src="/uploads/{{ cardapio.thumb }}" class="img">
+                <p class="produto-descricao">{{ cardapio.nome }}</p>
+                <p class="produto-preco">R$ {{ cardapio.valor }}</p>
+                <i onclick="addToCart({{cardapio.id}})" class="fas fa-cart-plus"></i>
+            </li>  
+      
+{% endfor %}
+</ul> 
+{% endblock %}

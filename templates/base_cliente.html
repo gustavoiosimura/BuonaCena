@@ -19,7 +19,7 @@
             <nav>
                 <div class="hidden">
                     <label for="pesquisa"></label>
-                    <input type="text" class="pesquisa" id="pesquisa" placeholder="O que você está procurando?">
+                    <form method="GET" action="{{ url_for('buscar') }}"><input name="query" type="text" class="pesquisa" id="pesquisa" placeholder="O que você está procurando?"></form>
                 </div>
                 <ul>
                     <li>
