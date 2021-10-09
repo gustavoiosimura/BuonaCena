@@ -1,9 +1,8 @@
 from datetime import timedelta
-from flask import Flask, render_template, redirect, request, url_for, flash
+from flask import Flask, render_template, redirect, request, url_for, flash, session, make_response
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin, login_required, login_user, logout_user
-from werkzeug.security import generate_password_hash, check_password_hash
-from flask_migrate import Migrate 
+from werkzeug.security import generate_password_hash, check_password_hash 
 from werkzeug.utils import secure_filename
 import urllib.request
 import os
@@ -25,8 +24,7 @@ app.config['MAX_CONTENT_LENGTH'] = 16 * 1000 * 1000
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-db = SQLAlchemy(app)
-migrate = Migrate(app, db)
+db = SQLAlchemy(app) 
 login_manager = LoginManager(app)
 
 
@@ -59,7 +57,7 @@ class Cardapio(db.Model):
     
 
     def __str__(self):
-        return self.name
+        return self.nome
 
 class Profile(db.Model):
     __tablename__ = "profiles"
@@ -76,6 +74,31 @@ def index():
     users = User.query.all() # Select * from users; 
     cardapios = Cardapio.query.all()
     return render_template("index.html", users=users, cardapios=cardapios)
+
+@app.route('/cart/', methods=['POST', 'GET'])
+@app.route('/cart/<int:id>', methods=['POST', 'GET'])
+def carrinho(id=0):
+    if id == 0:
+        cartlist = session['carrinho']  
+        cart = []
+        for i in cartlist:
+            item_id = Cardapio.query.filter_by(id=i) 
+            item_id = Cardapio.query.filter_by(id=i).first()
+            item = item_id
+            cart.append(item) 
+        return render_template('carrinho.html', cart=cart) 
+    if 'carrinho' in session: 
+        cartlist = session['carrinho'] 
+        cartlist.append(id)
+        session['carrinho'] = cartlist
+    else:
+        session['carrinho'] = [] # setting session data
+    return "Carrinho: {}".format(session.get('carrinho'))
+
+@app.route('/delete-cart/')
+def delete_visits():
+    session['carrinho'] = [] # delete cart
+    return 'carrinho deletado'
 
 @app.route("/cadastros")
 @login_required
@@ -140,11 +163,6 @@ def register():
         return redirect(url_for("cadastros"))
 
     return render_template("cadastros.html")
-
-@app.route('/cart/<int:productid>', methods=['POST'])
-def add_to_cart(productid): 
-
-    return render_tempate('index.html', product=products)
 
 @app.route("/register_cardapio", methods=["GET", "POST"])
 def registerCardapio():

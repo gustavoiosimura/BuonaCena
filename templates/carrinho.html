@@ -1,0 +1,11 @@
+{% extends 'base_cliente.html' %}
+
+{% block content %}  
+<ul>
+    {% if cart %}
+    {% for produto in cart %}
+        <li>{{ produto.nome }} | {{ produto.valor }}</li>
+    {% endfor %}
+    {% endif %}
+</ul>
+{% endblock %}

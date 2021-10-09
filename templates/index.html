@@ -3,8 +3,8 @@
 
 {% block content %}  
 <script>
-    function addToCart(productId) {
-        fetch('/cart/productId', 
+    function addToCart(id) {
+        fetch('/cart/'+id, 
             {method: 'POST'}
         )
     }
@@ -18,7 +18,7 @@
                             <img src="/uploads/{{ cardapio.thumb }}" class="img">
                             <p class="produto-descricao">{{ cardapio.nome }}</p>
                             <p class="produto-preco">R$ {{ cardapio.valor }}</p>
-                            <i class="fas fa-cart-plus"></i>
+                            <i onclick="addToCart({{ cardapio.id }})" class="fas fa-cart-plus"></i>
                         </li> 
                       {% endfor %} 
                   </div> 
@@ -46,7 +46,7 @@
                             <img src="/uploads/{{ cardapio.thumb }}" class="img">
                             <p class="produto-descricao">{{ cardapio.nome }}</p>
                             <p class="produto-preco">R$ {{ cardapio.valor }}</p>
-                            <i class="fas fa-cart-plus"></i>
+                            <i onclick="addToCart({{cardapio.id}})"class="fas fa-cart-plus"></i>
                         </li> 
                       {% endfor %} 
                   </div> 
