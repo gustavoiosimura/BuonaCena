@@ -81,6 +81,9 @@ def carrinho(id=0):
     if id == 0:
         cartlist = session['carrinho']  
         cart = []
+        if len(cartlist) == 0:
+            flash('Ops! Seu carrinho esta vazio.')
+            return render_template("carrinho.html")
         for i in cartlist:
             item_id = Cardapio.query.filter_by(id=i) 
             item_id = Cardapio.query.filter_by(id=i).first()

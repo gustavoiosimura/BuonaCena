@@ -1,6 +1,16 @@
 {% extends 'base_cliente.html' %}
-
-{% block content %}  
+{% block content %}   
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul style="width: 100%;" class=flashes>
+    {% for message in messages %}
+      <div class="alert alert-danger" role="alert">
+        <li>{{ message }}</li>
+      </div>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %} 
 <ul>
     {% if cart %}
     {% for produto in cart %}
