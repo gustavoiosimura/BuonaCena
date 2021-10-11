@@ -1,0 +1,37 @@
+{% extends 'base_backoffice.html' %}
+{% block content %}  
+<form class="cadastro" style="width: 43%;" action="{{ url_for('updatecardapio', id=item.id ) }}" method="POST" enctype="multipart/form-data">
+    <p class="titulo">
+        <a onclick=""><i style="color:#F64B39" class="fas fa-list"></i></a>  CADASTRO DE PRODUTO
+    </p>
+    <fieldset class="grupo"> <!--Serve para agrupar campos-->
+        <div class="campo">
+            <label for="nome">ID<strong></strong></label> 
+        <input type="text" name="id" id="id" value="{{ item.id }}" disabled>
+        </div>
+        <div class="campo">
+            <label for="nome">Nome do item<strong>*</strong></label> 
+        <input type="text" name="nome" id="nome" value="{{ item.nome }}" required>
+        </div>
+        <div class="campo">
+            <label for="valor">Valor<strong>*</strong></label>
+            <input type="text" name="valor" id="valor" value="{{ item.valor }}" required>
+        </div>
+        <div class="campo">
+          <label for="descricao">Descrição<strong>*</strong></label>
+          <input type="text" name="descricao" id="descricao" value="{{ item.descricao }}" required>
+      </div> 
+      <!--<div class="campo">
+          <label for="upload">Thumbnail</label>
+          <input type="text" name="thumb" id="thumb" required>
+      </div> -->
+      <div class="campo">
+          <label for="descricao">Foto<strong></strong></label>
+          <input type="file" name="thumb" id="thumb">
+      </div> 
+        <div class="cadastrar">
+            <input type="submit" name="Cadastrar" value="CADASTRAR">
+        </div>
+    </fieldset>
+</form>
+{% endblock %}

@@ -103,12 +103,13 @@ def delete_visits():
     session['carrinho'] = [] # delete cart
     return 'carrinho deletado'
 
+@app.route("/cadastros/<tab>")
 @app.route("/cadastros")
 @login_required
-def cadastros():
+def cadastros(tab='funcionarios'):
     users = User.query.all() # Select * from users; 
-    cardapios = Cardapio.query.all() # Select * from users; 
-    return render_template("cadastros.html", users=users, cardapios=cardapios)
+    cardapios = Cardapio.query.all() # Select * from users;  
+    return render_template("cadastros.html", users=users, cardapios=cardapios, tab=tab)
 
 @app.route("/pedidos")
 @login_required
@@ -191,7 +192,99 @@ def registerCardapio():
 
         return redirect(url_for("cadastros"))
 
-    return render_template("cadastros.html")    
+    return render_template("cadastros.html")  
+
+@app.route("/atualizar_cardapio/<int:id>", methods=["GET", "POST"])
+def atualizarcardapio(id):
+    item = Cardapio.query.filter_by(id=id).first()
+
+    return render_template("atualizar-produto.html", item=item) 
+
+@app.route("/update_cardapio/<int:id>", methods=["POST"])
+def updatecardapio(id):
+    item = Cardapio.query.filter_by(id=id).first()
+    if request.method == "POST": 
+        cardapio = Cardapio()
+        cardapio.id = id
+        cardapio.nome = request.form["nome"] 
+        #cardapio = Cardapio.query.filter_by(id=id).update(dict(nome=cardapio.nome))
+        cardapio.valor = request.form["valor"]
+        cardapio.descricao = request.form["descricao"]
+        if request.files['thumb'].filename != '':
+            file = request.files['thumb']
+            if file and allowed_file(file.filename):
+                filename = secure_filename(file.filename)
+                file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+                cardapio.thumb = filename
+                #print('upload_image filename: ' + filename)
+                flash('Upload realizado com sucesso')
+            else:
+                flash('Apenas permitimos os seguintes formatos: png, jpg, jpeg, gif')
+                return redirect(request.url)
+            Cardapio.query.filter_by(id=id).update(dict(thumb=cardapio.thumb))   
+
+        Cardapio.query.filter_by(id=id).update(dict(nome=cardapio.nome))
+        Cardapio.query.filter_by(id=id).update(dict(valor=cardapio.valor)) 
+        Cardapio.query.filter_by(id=id).update(dict(descricao=cardapio.descricao)) 
+        db.session.flush()
+        db.session.commit()
+        return redirect(url_for("cadastros", tab='produtos'))
+
+
+@app.route("/atualizar_funcionario/<int:id>", methods=["GET", "POST"])
+def atualizarfuncionario(id):
+    funcionario = User.query.filter_by(id=id).first()
+
+    return render_template("atualizar-funcionario.html", funcionario=funcionario) 
+
+@app.route("/update_funcionario/<int:id>", methods=["POST"])
+def updatefuncionario(id):
+    funcionario = User.query.filter_by(id=id).first()
+    if request.method == "POST": 
+        user = User()
+        user.id = id
+        if request.form["name"] != funcionario.name:
+            old_name = funcionario.name
+            user.name = request.form["name"]  
+            User.query.filter_by(id=id).update(dict(name=user.name))
+            msg = 'Nome de ' + old_name + ' alterado para ' + request.form["name"]
+            flash(msg)
+
+        if request.form["email"] != funcionario.email:
+            user.email = request.form["email"]  
+            User.query.filter_by(id=id).update(dict(email=user.email))
+            msg = 'Email de ' + request.form["name"] + ' alterado com sucesso!'
+            flash(msg) 
+
+        if request.form["celular"] != funcionario.celular:
+            user.celular = request.form["celular"] 
+            User.query.filter_by(id=id).update(dict(celular=user.celular))
+            msg = 'Celular de ' + request.form["name"] + ' alterado com sucesso!'
+            flash(msg) 
+
+        if request.form["cargo"] != funcionario.cargo:
+            user.cargo = request.form["cargo"] 
+            User.query.filter_by(id=id).update(dict(cargo=user.cargo))
+            msg = 'Cargo de ' + request.form["name"] + ' alterado para ' + request.form["cargo"]
+            flash(msg)
+
+        if request.form["password"] != '':
+            if request.form["password"] == request.form["confirmacao"]:
+                user.password = generate_password_hash(request.form["password"]) 
+                User.query.filter_by(id=id).update(dict(password=user.password))
+                msg = 'Senha de ' + request.form["name"] + ' alterada com sucesso!'
+                flash(msg) 
+            else:
+                flash("Assegure-se de que os campos Senha e Confirmar senha coincidem exatamente.")
+                return redirect(url_for("atualizarfuncionario", id=id))
+        
+        #problema ao atualizar o cargo!!! 
+
+        db.session.flush()
+        db.session.commit()
+        return redirect(url_for("cadastros", tab='funcionarios'))
+
+        
 
 @app.route("/login", methods=["GET", "POST"])
 def login():

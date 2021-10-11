@@ -9,6 +9,8 @@
 
 {% block content %}
 <script>
+ 
+
      function tabFuncionarios(){
         document.getElementById("ListaDeProdutos").style.display = "none";
         document.getElementById("CadastroDeFuncionarios").style.display = "none";
@@ -36,12 +38,35 @@
         document.getElementById("ListaDeProdutos").style.display = "block";
         document.getElementById("CadastroDeProdutos").style.display = "none";
     }
+
+    function validaTab(){ 
+        var tab = "{{ tab }}";
+        if (tab == "produtos"){
+            $(document).ready( function () {
+            tabProdutos();
+            });
+        }
+    }
+
+    validaTab()
 </script>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <link rel="stylesheet"
      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <div class="opcoes">
+
+     {% with messages = get_flashed_messages() %}
+     {% if messages %}
+       <ul style="width: 100%;" class=flashes>
+       {% for message in messages %}
+         <div class="alert alert-success" role="alert">
+           <li>{{ message }}</li>
+         </div>
+       {% endfor %}
+       </ul>
+     {% endif %}
+   {% endwith %} 
+     <div class="opcoes">
         <button id="botoes" onclick="tabFuncionarios()">Funcionários</button>
         <button id="botoes2" onclick="tabProdutos()">Produto</button>
         <button id="botoes3" onclick="clicar3()">Atualizar</button> 
@@ -61,6 +86,9 @@
                 </td>
                 <td>
                 Contato
+                </td>
+                <td>
+                    &nbsp;
                 </td>
                 <td style="color: rgb(0, 161, 35);">
                     <a onclick="AdicionarUsuarios()"><i class="fas fa-user-plus"></i></a>
@@ -82,6 +110,11 @@
             </td>
             <td>
                 {{ user.celular }}
+            </td>
+            <td>
+                <a href="{{ url_for('atualizarfuncionario', id=user.id) }}" class="btn btn-warning btn-sm">
+                    <i aria-hidden="true" style="color:white;" class="fas fa-edit"></i>
+                </a>
             </td>
             <td>  
                 <a class="btn btn-danger btn-sm" href="{{ url_for('delete', id=user.id) }}">
@@ -143,7 +176,7 @@
     <div id="CadastroDeProdutos" style="display:none;">   
         <form class="cadastro" style="width: 50%;" action="{{ url_for('registerCardapio') }}" method = "POST" enctype = "multipart/form-data">
               <p class="titulo">
-                  <a onclick=""><i style="color:#F64B39" class="fas fa-list"></i></a>  CADASTRO DE PRODUTO
+                  <a onclick=""><i onclick="ListaDeProdutos()" style="color:#F64B39" class="fas fa-list"></i></a>  CADASTRO DE PRODUTO
               </p>
               <fieldset class="grupo"> <!--Serve para agrupar campos-->
                   <div class="campo">
@@ -199,6 +232,9 @@
                 <td>
                 Foto
                 </td>
+                <td>
+                    &nbsp;
+                </td>
                 <td style="color: rgb(0, 161, 35);">
                     <a onclick="AdicionarProdutos()"><i class="fas fa-folder-plus"></i></a>
                 </td>
@@ -219,6 +255,11 @@
                 </td>
                 <td>
                     <img style="width: 50px;" src="/uploads/{{ cardapio.thumb }}">
+                </td>
+                <td>
+                    <a href="{{ url_for('atualizarcardapio', id=cardapio.id) }}" class="btn btn-warning btn-sm">
+                        <i aria-hidden="true" style="color:white;" class="fas fa-edit"></i>
+                    </a>
                 </td>
                 <td>
                     <a class="btn btn-danger btn-sm" href="{{ url_for('delete_cardapio', id=cardapio.id) }}">
