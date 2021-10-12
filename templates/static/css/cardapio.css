@@ -4,6 +4,9 @@ body {
     height: 100vh; */
     box-sizing: border-box;
 }
+.fa-cart-plus{
+    cursor: pointer; 
+}
 @media screen and (max-width: 768px){
     .navut{
         margin-right: 1px !important;

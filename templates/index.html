@@ -2,13 +2,6 @@
 {% extends 'base_cliente.html' %}
 
 {% block content %}  
-<script>
-    function addToCart(id) {
-        fetch('/cart/'+id, 
-            {method: 'POST'}
-        )
-    }
-    </script> 
             <h2>Pratos</h2>
             <div class="row"> 
                 {% for cardapio in cardapios if cardapio.tipo == "pratos" %} 
