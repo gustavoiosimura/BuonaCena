@@ -5,6 +5,16 @@ body {
     box-sizing: border-box;
 }
 @media screen and (max-width: 768px){
+    .navut{
+        margin-right: 1px !important;
+    }
+    .carticon{
+        line-height: 42pt !important;
+    }
+    .navlogo{
+        width:150px;
+        margin-left: 15px;
+    }
     .searchicon{
         left:22px;
     }
@@ -15,6 +25,7 @@ body {
         background-color: rgb(196 196 196 / 45%); 
         border:none;
         border-radius:5px;
+        font-size: 12px;
         }
     .grid-container {
         display: grid;
@@ -51,6 +62,12 @@ body {
     }  
 }
 @media screen and (min-width: 768px) and (max-width: 1900px)  {
+    .carticon{
+        line-height: 40pt !important;
+    }
+    .navlogo{
+        width:175px;
+    }
     .searchicon{
         left:27px;
     }
@@ -64,6 +81,7 @@ body {
         }
     .navut{ 
         width:60%;
+        margin-top:10px;
     }
     .grid-container {
         display: grid;
