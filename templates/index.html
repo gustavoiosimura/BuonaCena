@@ -8,50 +8,64 @@
             {method: 'POST'}
         )
     }
-    </script>
-    <main> 
+    </script> 
             <h2>Pratos</h2>
-           
-            <ul class="container"> 
+            <div class="row"> 
                 {% for cardapio in cardapios if cardapio.tipo == "pratos" %} 
-                        <li style=" margin-left:20px;">
-                            <img src="/uploads/{{ cardapio.thumb }}" class="img">
-                            <p class="produto-descricao">{{ cardapio.nome }}</p>
-                            <p class="produto-preco">R$ {{ cardapio.valor }}</p>
-                            <i onclick="addToCart({{ cardapio.id }})" class="fas fa-cart-plus"></i>
-                        </li> 
-                      {% endfor %} 
-                  </div> 
-            </ul> 
+                <div class="grid-container" style="border: 2px solid #cfcdcd;padding:10px;border-radius:5px;">
+                    <div class="item1" style="border-radius:5px;" ><img  src="/uploads/{{ cardapio.thumb }}" alt="" ></div>
+                    <div class="item2" style="padding-left: 10px;">
+                      <div class="inside-grid-container" style="height: 100px;">
+                        <div class="item3">{{ cardapio.nome }}</div>  
+                      </div>
+                      <div class="inside-inside-grid-container">
+                        <div class="item4">R$ {{ cardapio.valor }}</div>  
+                        <div class="item5"><i onclick="addToCart({{ cardapio.id }})" class="fas fa-cart-plus"></i></div>  
+                      </div>
+                    </div>
+                  </div>
+                  {% endfor %} 
+            
+                </div>
 
-            <h2>Bebidas</h2>
-
-            <ul class="container"> 
+         <h2>Bebidas</h2>
+            <div class="row"> 
                 {% for cardapio in cardapios if cardapio.tipo == "bebidas" %} 
-                        <li style=" margin-left:20px;">
-                            <img src="/uploads/{{ cardapio.thumb }}" class="img">
-                            <p class="produto-descricao">{{ cardapio.nome }}</p>
-                            <p class="produto-preco">R$ {{ cardapio.valor }}</p>
-                            <i onclick="addToCart({{cardapio.id}})" class="fas fa-cart-plus"></i>
-                        </li> 
-                      {% endfor %} 
-                  </div> 
-            </ul> 
+                <div class="grid-container" style="border: 2px solid #cfcdcd;padding:10px;border-radius:5px;">
+                    <div class="item1" style="border-radius:5px;" ><img  src="/uploads/{{ cardapio.thumb }}" alt="" ></div>
+                    <div class="item2" style="padding-left: 10px;">
+                      <div class="inside-grid-container" style="height: 100px;">
+                        <div class="item3">{{ cardapio.nome }}</div>  
+                      </div>
+                      <div class="inside-inside-grid-container">
+                        <div class="item4">R$ {{ cardapio.valor }}</div>  
+                        <div class="item5"><i onclick="addToCart({{ cardapio.id }})" class="fas fa-cart-plus"></i></div>  
+                      </div>
+                    </div>
+                  </div>
+                  {% endfor %} 
+            
+                </div>
+            
 
-            <h2>Sobremesas</h2>
-
-            <ul class="container"> 
+         <h2>Sobremesas</h2>
+            <div class="row"> 
                 {% for cardapio in cardapios if cardapio.tipo == "sobremesas" %} 
-                        <li style=" margin-left:20px;">
-                            <img src="/uploads/{{ cardapio.thumb }}" class="img">
-                            <p class="produto-descricao">{{ cardapio.nome }}</p>
-                            <p class="produto-preco">R$ {{ cardapio.valor }}</p>
-                            <i onclick="addToCart({{cardapio.id}})"class="fas fa-cart-plus"></i>
-                        </li> 
-                      {% endfor %} 
-                  </div> 
-            </ul> 
-  
-    </main>
+                <div class="grid-container" style="border: 2px solid #cfcdcd;padding:10px;border-radius:5px;">
+                    <div class="item1" style="border-radius:5px;" ><img  src="/uploads/{{ cardapio.thumb }}" alt="" ></div>
+                    <div class="item2" style="padding-left: 10px;">
+                      <div class="inside-grid-container" style="height: 100px;">
+                        <div class="item3">{{ cardapio.nome }}</div>  
+                      </div>
+                      <div class="inside-inside-grid-container">
+                        <div class="item4">R$ {{ cardapio.valor }}</div>  
+                        <div class="item5"><i onclick="addToCart({{ cardapio.id }})" class="fas fa-cart-plus"></i></div>  
+                      </div>
+                    </div>
+                  </div>
+                  {% endfor %} 
+            
+                </div>
+             
     <script type="text/javascript" src="js/script.js"></script>
     {% endblock %}

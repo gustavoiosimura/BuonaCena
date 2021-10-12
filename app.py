@@ -79,6 +79,8 @@ def index():
 @app.route('/cart/<int:id>', methods=['POST', 'GET'])
 def carrinho(id=0):
     if id == 0:
+        if 'carrinho' not in session:
+            session['carrinho'] = []
         cartlist = session['carrinho']  
         cart = []
         if len(cartlist) == 0:
@@ -96,6 +98,7 @@ def carrinho(id=0):
         session['carrinho'] = cartlist
     else:
         session['carrinho'] = [] # setting session data
+        session['carrinho'].append(id)
     return "Carrinho: {}".format(session.get('carrinho'))
 
 @app.route('/delete-cart/')
