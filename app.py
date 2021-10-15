@@ -80,31 +80,75 @@ def index():
 def carrinho(id=0):
     if id == 0:
         if 'carrinho' not in session:
-            session['carrinho'] = []
-        cartlist = session['carrinho']  
+            cartlist = []
+            valorTotal = 0
+            session['carrinho'] = {'items':cartlist, 'total':valorTotal}
+        metacart = session['carrinho']
+        lista = session['carrinho']['items']
         cart = []
-        if len(cartlist) == 0:
+        if len(lista) == 0:
             flash('Ops! Seu carrinho esta vazio.')
             return render_template("carrinho.html")
-        for i in cartlist:
+        for i in lista:
             item_id = Cardapio.query.filter_by(id=i) 
             item_id = Cardapio.query.filter_by(id=i).first()
             item = item_id
             cart.append(item) 
-        return render_template('carrinho.html', cart=cart) 
-    if 'carrinho' in session: 
-        cartlist = session['carrinho'] 
+        return render_template('carrinho.html', cart=cart, total=session['carrinho']['total']) 
+    if 'carrinho' in session:  
+        cartlist = session['carrinho']['items']
         cartlist.append(id)
-        session['carrinho'] = cartlist
+        lista = cartlist
+        cart = []
+        valores = []
+        for i in lista:
+            item_id = Cardapio.query.filter_by(id=i) 
+            item_id = Cardapio.query.filter_by(id=i).first()
+            item = item_id
+            valores.append(item.valor)
+            cart.append(item) 
+        valorTotal = float(sum(valores))
+        session['carrinho'] = {'items':cartlist, 'total':valorTotal}
     else:
-        session['carrinho'] = [] # setting session data
-        session['carrinho'].append(id)
+        cartlist = []
+        cartlist.append(id)
+        lista = cartlist
+        cart = []
+        valores = []
+        for i in lista:
+            item_id = Cardapio.query.filter_by(id=i) 
+            item_id = Cardapio.query.filter_by(id=i).first()
+            item = item_id
+            valores.append(item.valor)
+            cart.append(item) 
+        valorTotal = float(sum(valores))
+        session['carrinho'] = {'items':cartlist, 'total':valorTotal}# setting session data
     return "Carrinho: {}".format(session.get('carrinho'))
+
+@app.route('/delete-cart/<int:id>')
+def delete_cart_item(id):
+    cartlist = session['carrinho']['items']
+    cartlist.remove(id)
+    lista = cartlist
+    cart = []
+    valores = []
+    for i in lista:
+        item_id = Cardapio.query.filter_by(id=i) 
+        item_id = Cardapio.query.filter_by(id=i).first()
+        item = item_id
+        valores.append(item.valor)
+        cart.append(item) 
+    valorTotal = float(sum(valores))
+    session['carrinho'] = {'items':cartlist, 'total':valorTotal} # delete cart 
+    return render_template('carrinho.html', cart=cart, total=session['carrinho']['total']) 
 
 @app.route('/delete-cart/')
 def delete_visits():
-    session['carrinho'] = [] # delete cart
-    return 'carrinho deletado'
+    cartlist = []
+    valorTotal = 0
+    session['carrinho'] = {'items':cartlist, 'total':valorTotal} # delete cart
+    flash('Você esvaziou seu carrinho.')
+    return redirect('/cart')
 
 @app.route("/cadastros/<tab>")
 @app.route("/cadastros")

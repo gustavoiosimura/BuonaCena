@@ -1,21 +1,65 @@
 {% extends 'base_cliente.html' %}
-{% block content %}   
+{% block content %}  
+<style>
+  @media screen and (min-width:800px) {
+    .corpo{ 
+      width:60%;
+      margin:auto;
+  }
+    .flashes{
+      width:60%;
+      margin:20px auto;
+    }
+  }
+  
+</style> 
 {% with messages = get_flashed_messages() %}
   {% if messages %}
-    <ul style="width: 100%;" class=flashes>
+    <ul   class="flashes">
     {% for message in messages %}
       <div class="alert alert-danger" role="alert">
         <li>{{ message }}</li>
       </div>
     {% endfor %}
     </ul>
+  {% else %} 
+  <div class="corpo"> 
+    <h2>Seu carrinho</h2>
+    <div>
+    <table style="height:100px;overflow:auto;" class="table">
+      <thead>
+        <tr style="border:0px;"> 
+          <th colspan="4" style="border:0px;text-align: right;color: red;"><a href="/delete-cart/" style="text-decoration: none;color: red;"><i class="fas fa-trash-alt"></i>&nbsp;Deletar Carrinho</a></th> 
+        </tr>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Pratos</th>
+          <th scope="col">Preços</th> 
+          <th scope="col"></th> 
+        </tr>
+      </thead>
+      <tbody>
+        
+        {% if cart %}
+        {% for produto in cart %}
+        <tr>
+          <th scope="col">{{ produto.id }}</th>
+          <th scope="col">{{ produto.nome }}</th>
+          <th scope="col">{{ produto.valor }}</th> 
+          <th scope="col"><a href="/delete-cart/{{ produto.id }}" style="text-decoration: none;color: red;"><i class="fas fa-trash-alt"></i></a></th>
+        </tr>
+        {% endfor %}
+        {% endif %}
+      </tbody>
+      <tbody> 
+        <tr>
+          <th scope="col">Total:</th>
+          <th scope="col">{{ "R${:,.2f}".format(total)  }}</th>
+          <th scope="col"></th> 
+        </tr> 
+      </tbody>
+    </table> 
+  </div>
   {% endif %}
-{% endwith %} 
-<ul>
-    {% if cart %}
-    {% for produto in cart %}
-        <li>{{ produto.nome }} | {{ produto.valor }}</li>
-    {% endfor %}
-    {% endif %}
-</ul>
+{% endwith %}   
 {% endblock %}
