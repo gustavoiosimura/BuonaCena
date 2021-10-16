@@ -52,6 +52,7 @@ class Cardapio(db.Model):
     nome = db.Column(db.String(84), nullable=False)
     tipo = db.Column(db.String(84), nullable=False)
     valor = db.Column(db.DECIMAL(10,2), nullable=False)
+    promocional = db.Column(db.DECIMAL(10,2))
     descricao = db.Column(db.String(120))
     thumb = db.Column(db.String(240))
     
@@ -105,7 +106,10 @@ def carrinho(id=0):
             item_id = Cardapio.query.filter_by(id=i) 
             item_id = Cardapio.query.filter_by(id=i).first()
             item = item_id
-            valores.append(item.valor)
+            if item.promocional:
+                valores.append(item.promocional)
+            else:
+                valores.append(item.valor)
             cart.append(item) 
         valorTotal = float(sum(valores))
         session['carrinho'] = {'items':cartlist, 'total':valorTotal}
@@ -119,7 +123,10 @@ def carrinho(id=0):
             item_id = Cardapio.query.filter_by(id=i) 
             item_id = Cardapio.query.filter_by(id=i).first()
             item = item_id
-            valores.append(item.valor)
+            if item.promocional:
+                valores.append(item.promocional)
+            else:
+                valores.append(item.valor)
             cart.append(item) 
         valorTotal = float(sum(valores))
         session['carrinho'] = {'items':cartlist, 'total':valorTotal}# setting session data
@@ -256,6 +263,7 @@ def updatecardapio(id):
         cardapio.nome = request.form["nome"] 
         #cardapio = Cardapio.query.filter_by(id=id).update(dict(nome=cardapio.nome))
         cardapio.valor = request.form["valor"]
+        cardapio.promocional = request.form["promocional"]
         cardapio.descricao = request.form["descricao"]
         if request.files['thumb'].filename != '':
             file = request.files['thumb']
@@ -272,6 +280,7 @@ def updatecardapio(id):
 
         Cardapio.query.filter_by(id=id).update(dict(nome=cardapio.nome))
         Cardapio.query.filter_by(id=id).update(dict(valor=cardapio.valor)) 
+        Cardapio.query.filter_by(id=id).update(dict(promocional=cardapio.promocional)) 
         Cardapio.query.filter_by(id=id).update(dict(descricao=cardapio.descricao)) 
         db.session.flush()
         db.session.commit()

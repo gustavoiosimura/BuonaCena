@@ -3,26 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="/css/backoffice_style.css" media="screen"/>
-    <link rel="stylesheet" type="text/css" href="/css/reset.css" media="screen"/>
-    <link rel = "preconnect" href = "https://fonts.googleapis.com">
-    <link href = "https: //fonts.googleapis.com/css2? family = Tenor + Sans & display = swap "rel =" stylesheet ">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.min.js"></script>
-    <title>Buona Cena - Cadastro</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Cardápio</title>
+    <link rel="stylesheet" href="/css/cardapio.reset.css">
+    <link rel="stylesheet" href="/css/cardapio.css">
+    <link rel="stylesheet" href="/css/backoffice_style.css">
+    <link rel="shortcut icon" href="/imgs/logosemfundo2.png" type="image/x-icon">
+    <link href="/fontawesome/css/all.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Tenor+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 </head>
-<body>
-    <header>
-       <div class="caixa">
-            <h1><img src="/img/logo-buona-cena.png" class="logo" width="300" height="300"></h1> 
-            {% include 'nav_backoffice.html' %}
-        </div>
-    </header>
-    <div class="container" style="margin: 0 !important;">
+<body style="max-width:100%;">
+    <nav class="navbar navbar-expand-lg" style="background-color:#EDE9E9 !important;">
+      <a class="navbar-brand imglogo" href="/"><img src="/img/logosemfundo2.png" class="navlogo" alt="Logo Buona Cena" ></a>
+      <div class="row navut" style="margin-left: auto;">
+        <div class="col-6" style="padding-left:0px;padding-right:0px;">
+      
+      </div>
+      <div class="col-6"> 
+        <a href="/pedidos">PEDIDOS</a>
+            <a href="">|</a>
+            <a href="/cadastros">CADASTROS</a>
+            <a href="{{ url_for('logout') }}"><i class="fas fa-sign-out-alt" id="sair"></i></a>
+        </ul>
+    </div>
+      </div>
+    </nav>
+    <div class="container-fluid" style="max-width:100%;">
       {% block content %} 
       {% endblock %}
       </div>
+      <script type="text/javascript" src="js/cardapio.js"></script>
+ 
 </body> 
-</html>
+       

@@ -33,8 +33,8 @@
         </tr>
         <tr>
           <th scope="col">#</th>
-          <th scope="col">Pratos</th>
-          <th scope="col">Preços</th> 
+          <th scope="col">Prato</th>
+          <th scope="col">Preço</th> 
           <th scope="col"></th> 
         </tr>
       </thead>
@@ -45,7 +45,14 @@
         <tr>
           <th scope="col">{{ produto.id }}</th>
           <th scope="col">{{ produto.nome }}</th>
-          <th scope="col">{{ produto.valor }}</th> 
+          <th scope="col">
+            {% if produto.promocional %}
+              R$ {{ produto.promocional }}
+              <del>R$ {{ produto.valor}}</del>
+            {% else %}
+              R$ {{ produto.valor}}
+            {% endif %}
+          </th> 
           <th scope="col"><a href="/delete-cart/{{ produto.id }}" style="text-decoration: none;color: red;"><i class="fas fa-trash-alt"></i></a></th>
         </tr>
         {% endfor %}

@@ -116,7 +116,7 @@
                 </a>
             </td>
             <td>  
-                <a class="btn btn-danger btn-sm" href="{{ url_for('delete', id=user.id) }}">
+                <a class="btn btn-danger btn-sm deletebtn" href="{{ url_for('delete', id=user.id) }}">
                 <i class="fa fa-trash" aria-hidden="true"></i>
                 </a>
             </td>
@@ -127,90 +127,94 @@
     </div>
     <div id="CadastroDeFuncionarios" style="display:none;">   
       <form class="cadastro" style="width: 50%;" action="{{ url_for('register') }}" method="POST">
-            <p class="titulo">
-                <a onclick="ListaDeFuncionarios()"><i style="color:#F64B39" class="fas fa-list"></i></a>  CADASTRO DE FUNCIONÁRIOS
-            </p>
+        <div class="tituloform"><center><a href="/cadastros"><i style="color:#F64B39" class="fas fa-list"></i></a>  CADASTRAR FUNCIONÁRIO</center></div>
             <fieldset class="grupo"> <!--Serve para agrupar campos-->
-                <div class="campo">
-                    <label for="nome">Nome Completo<strong>*</strong></label> 
-                <input type="text" name="name" id="nome" required>
+                <div class="row">
+                    <div class="col-12"> 
+                        <label for="nome" class="form-label">Nome Completo<strong>*</strong></label> 
+                        <input type="text" class="form-control" name="name" id="nome" required>
+                    </div>
                 </div>
-                <div class="campo">
-                    <label for="email">E-mail</label>
-                    <input type="email" name="email" id="email">
-                </div>
-                <div class="campo">
-                    <label for="telefone">Telefone<strong>*</strong></label>
-                    <input type="tel" name="celular" id="telefone" required>
-                </div>
-                <div class="campo" name="senha">
-                    <label for="senha">Senha<strong>*</strong></label>
-                    <input type='password' name="password"  id="senha" maxlength="16" minLength="8" required="">
-                    <i class="fa fa-eye" id="ocultar"></i>
-                    <i class="fas fa-eye-slash" id="mostrar" ></i>
+                <div class="row">
+                    <div class="col-6"> 
+                        <label for="email" class="form-label">E-mail</label>
+                        <input type="email" class="form-control" name="email" id="email">
+                    </div>
+                    <div class="col-6">  
+                        <label for="telefone" class="form-label">Telefone<strong>*</strong></label>
+                        <input type="tel" name="celular" class="form-control" id="telefone" required>
+                    </div>
                 </div> 
-                <div class="campo" name="senha2">
-                    <label for="confirmacao">Confirme sua senha*</label>
-                    <input type="password" name="confirmacao" id="confirmacao" maxlength="16" minLength="8" required="">
-                    <i class="fa fa-eye" id="ocultar2"></i>
-                    <i class="fas fa-eye-slash" id="mostrar2"></i>
-                </div>
-                <div class="campo">
-                    <label for="permissao">Cargo<strong>*</strong></label>
-                    <select id="permissao" name="cargo">
-                </div>
-                <div class="campo">
-                <option selected disabled value="">Selecione</option>
-                <option value="atendente">Atendente</option>
-                <option value="entregador">Entregador</option>
-                <option value="gerente">Gerente</option>
-                </select>
-                </div>
+                <div class="row">
+                    <div class="col-6"> 
+                        <label for="senha" class="form-label">Senha<strong>*</strong></label>
+                        <input type='password' class="form-control" name="password"  id="senha" maxlength="16" minLength="8" required="">
+                    </div>
+                    <div class="col-6">  
+                        <label for="confirmacao" class="form-label">Confirme sua senha*</label>
+                        <input type="password" class="form-control" name="confirmacao" id="confirmacao" maxlength="16" minLength="8" required="">
+                    </div>
+                </div> 
+                <div class="row">
+                    <div class="col-12"> 
+                        <label for="permissao" class="form-label">Cargo<strong>*</strong></label>
+                        <select id="permissao" class="form-control" name="cargo">
+                            <option selected disabled value="">Selecione</option>
+                            <option value="atendente">Atendente</option>
+                            <option value="entregador">Entregador</option>
+                            <option value="gerente">Gerente</option>
+                        </select>
+                    </div>
+                </div> 
                 <div class="cadastrar">
-                    <input type="submit" name="Cadastrar" value="CADASTRAR" onclick="validarSenha()">
+                    <input type="submit" class="btn btn-primary" name="Cadastrar" value="CADASTRAR" onclick="validarSenha()">
                 </div>
             </fieldset>
         </form>
     </div> 
     <div id="CadastroDeProdutos" style="display:none;">   
         <form class="cadastro" style="width: 50%;" action="{{ url_for('registerCardapio') }}" method = "POST" enctype = "multipart/form-data">
-              <p class="titulo">
-                  <a onclick=""><i onclick="ListaDeProdutos()" style="color:#F64B39" class="fas fa-list"></i></a>  CADASTRO DE PRODUTO
-              </p>
+            <div class="tituloform"><center><a href="/cadastros/produtos"><i style="color:#F64B39" class="fas fa-list"></i></a>  CADASTRAR PRODUTO</center></div>
               <fieldset class="grupo"> <!--Serve para agrupar campos-->
-                  <div class="campo">
-                      <label for="nome">Nome do item<strong>*</strong></label> 
-                  <input type="text" name="nome" id="nome" required>
-                  </div>
-                  <div class="campo">
-                    <label for="tipo">Tipo<strong>*</strong></label>
-                    <select id="tipo" name="tipo">
-                </div>
-                  <div class="campo">
-                    <option selected disabled value="">Selecione</option>
-                    <option value="bebidas">bebidas</option>
-                    <option value="pratos">pratos</option>
-                    <option value="sobremesas">sobremesas</option>
-                    </select>
+                <div class="row">
+                    <div class="col-12">
+                        <label for="nome" class="form-label">Nome do item<strong>*</strong></label> 
+                        <input type="text" class="form-control" name="nome" id="nome" required>
                     </div>
-                  <div class="campo">
-                      <label for="valor">Valor<strong>*</strong></label>
-                      <input type="text" name="valor" id="valor" required>
+                </div>
+                <div class="row">
+                    <div class="col-12"> 
+                        <label for="tipo" class="form-label">Tipo<strong>*</strong></label>
+                        <select id="tipo" class="form-control" name="tipo">
+                            <option selected disabled value="">Selecione</option>
+                            <option value="bebidas">bebidas</option>
+                            <option value="pratos">pratos</option>
+                            <option value="sobremesas">sobremesas</option>
+                        </select>
+                    </div>
+                </div>
+                    <div class="row">
+                        <div class="col-6"> 
+                            <label for="valor" class="form-label">Valor<strong>*</strong></label>
+                            <input type="text" class="form-control" name="valor" id="valor" required>
+                        </div>
+                        <div class="col-6"> 
+                            <label for="descricao" class="form-label">Foto<strong></strong></label>
+                            <input type="file" name="thumb" class="form-control" id="thumb" required>
+                        </div>
                   </div>
-                  <div class="campo">
-                    <label for="descricao">Descrição<strong>*</strong></label>
-                    <input type="text" name="descricao" id="descricao" required>
+                  <div class="row">
+                    <div class="col-12">  
+                        <label for="descricao" class="form-label">Descrição<strong>*</strong></label>
+                        <textarea type="text" class="form-control" name="descricao" id="descricao" required></textarea>
+                    </div>
                 </div> 
                 <!--<div class="campo">
                     <label for="upload">Thumbnail</label>
                     <input type="text" name="thumb" id="thumb" required>
-                </div> -->
-                <div class="campo">
-                    <label for="descricao">Foto<strong></strong></label>
-                    <input type="file" name="thumb" id="thumb" required>
-                </div> 
+                </div> --> 
                   <div class="cadastrar">
-                      <input type="submit" name="Cadastrar" value="CADASTRAR">
+                      <input type="submit" class="btn btn-primary" name="Cadastrar" value="CADASTRAR">
                   </div>
               </fieldset>
           </form>
@@ -250,7 +254,12 @@
                     {{ cardapio.tipo }}
                 </td>
                 <td>
-                    {{ cardapio.valor }}
+                    {% if cardapio.promocional %}
+                        R$ {{ cardapio.promocional }}
+                        <del>R$ {{ cardapio.valor }} </del> 
+                    {% else %}
+                        R$ {{ cardapio.valor }}
+                    {% endif %}
                 </td>
                 <td>
                     <img style="width: 50px;" src="/uploads/{{ cardapio.thumb }}">
@@ -261,7 +270,7 @@
                     </a>
                 </td>
                 <td>
-                    <a class="btn btn-danger btn-sm" href="{{ url_for('delete_cardapio', id=cardapio.id) }}">
+                    <a class="btn btn-danger btn-sm deletebtn" href="{{ url_for('delete_cardapio', id=cardapio.id) }}">
                     <i class="fa fa-trash" aria-hidden="true"></i>
                     </a>
                 </td>

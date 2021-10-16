@@ -12,7 +12,14 @@
                         <div class="item3">{{ cardapio.nome }}</div>  
                       </div>
                       <div class="inside-inside-grid-container">
-                        <div class="item4">R$ {{ cardapio.valor }}</div>  
+                        <div class="item4"> 
+                          {% if cardapio.promocional %}
+                              R$ {{ cardapio.promocional }}
+                              <del>R$ {{ cardapio.valor }} </del> 
+                          {% else %}
+                              R$ {{ cardapio.valor }}
+                          {% endif %}
+                        </div>  
                         <div class="item5"><i onclick="addToCart({{ cardapio.id }})" class="fas fa-cart-plus"></i></div>  
                       </div>
                     </div>
@@ -31,7 +38,14 @@
                         <div class="item3">{{ cardapio.nome }}</div>  
                       </div>
                       <div class="inside-inside-grid-container">
-                        <div class="item4">R$ {{ cardapio.valor }}</div>  
+                        <div class="item4"> 
+                          {% if cardapio.promocional %}
+                              R$ {{ cardapio.promocional }}
+                              <del>R$ {{ cardapio.valor }} </del> 
+                          {% else %}
+                              R$ {{ cardapio.valor }}
+                          {% endif %}
+                        </div>  
                         <div class="item5"><i onclick="addToCart({{ cardapio.id }})" class="fas fa-cart-plus"></i></div>  
                       </div>
                     </div>
@@ -51,7 +65,14 @@
                         <div class="item3">{{ cardapio.nome }}</div>  
                       </div>
                       <div class="inside-inside-grid-container">
-                        <div class="item4">R$ {{ cardapio.valor }}</div>  
+                        <div class="item4"> 
+                          {% if cardapio.promocional %}
+                              R$ {{ cardapio.promocional }}
+                              <del>R$ {{ cardapio.valor }} </del> 
+                          {% else %}
+                              R$ {{ cardapio.valor }}
+                          {% endif %}
+                        </div>    
                         <div class="item5"><i onclick="addToCart({{ cardapio.id }})" class="fas fa-cart-plus"></i></div>  
                       </div>
                     </div>
