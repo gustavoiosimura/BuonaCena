@@ -1,0 +1,39 @@
+{% extends 'base_backoffice.html' %}
+{% block content %}  
+<form class="cadastro" style="width: 43%;" action="{{ url_for('novobanner') }}" method="POST" enctype="multipart/form-data">
+    <div class="tituloform"><center><a href="/banners" class="tituloform"><i style="color:#F64B39" class="fas fa-list"></i></a>NOVO BANNER</center></div>
+    <fieldset class="grupo"> <!--Serve para agrupar campos--> 
+        <div class="row">
+        <div class="col-12">
+            <label for="valor" class="form-label">Nome<strong>*</strong></label>
+            <input type="text" class="form-control" name="nome" id="nome"  required>
+        </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-12">
+                <label for="valor" class="form-label">Link<strong></strong></label>
+                <input type="text" class="form-control" name="link" id="nome" >
+            </div>
+            </div>
+      <!--<div class="campo">
+          <label for="upload">Thumbnail</label>
+          <input type="text" name="thumb" id="thumb" required>
+      </div> -->
+      <div class="row">
+        <div class="col-12">
+          <label for="descricao">Foto<strong></strong></label>
+          <input  class="form-control" type="file" name="img" id="thumb">
+          </div>
+      </div> 
+      <label for="descricao">Status<strong></strong></label>
+      <select class="form-select" aria-label="Default select example"  name="status">
+        <option value="1" selected>Ativo</option>
+        <option value="0">Desativo</option> 
+      </select>
+        <div class="cadastrar">
+            <input type="submit" class="btn btn-primary" name="Cadastrar" value="CADASTRAR">
+        </div>
+    </fieldset>
+</form>
+{% endblock %}

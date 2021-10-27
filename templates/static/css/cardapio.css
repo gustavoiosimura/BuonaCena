@@ -4,6 +4,7 @@ body {
     height: 100vh; */
     box-sizing: border-box;
 }
+
 .fa-cart-plus{
     cursor: pointer; 
 }
@@ -65,6 +66,9 @@ body {
     }  
 }
 @media screen and (min-width: 768px) and (max-width: 1900px)  {
+    .grid-container{
+        width:32% !important;
+    }
     .carticon{
         line-height: 40pt !important;
     }
@@ -196,18 +200,7 @@ a:hover, a:active { text-decoration: none; color:black }
     top: -3.4em;
     z-index: 80;
 }
-
-.carousel-item {
-    width: 100%; 
-}
-
-.carousel-control-next {
-    filter: invert(100%) !important; 
-}
-.carousel-control-prev {
-    filter: invert(100%) !important;
-}
-
+ 
 h2 {
     font-weight: bold;
     padding: 20px 0;

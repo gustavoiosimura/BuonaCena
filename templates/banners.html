@@ -1,0 +1,52 @@
+{% extends 'base_backoffice.html' %}
+{% block content %} 
+<table class="table table-striped">
+    <tbody>
+        <tr>
+            <th>
+                Nome
+            </th>
+            <th>
+                Link
+            </th>
+            <th>
+                Imagem
+            </th>
+            <th>
+                Status
+            </th>
+            <th>
+                <a style="color: rgb(0, 161, 35);" href="/novobanner"><i class="fas fa-user-plus"></i></a>
+            </th>
+        </tr>
+        {% for banner in banners %}
+        <tr>
+            <td>
+                {{ banner.nome }}
+            </td>
+            <td>
+                {{ banner.link }}
+            </td>
+            <td>
+                <img style="width: 100px;" src="/uploads/{{ banner.image }}">
+            </td>
+            <td>
+                {% if banner.status == 1 %}
+                <a  href="{{ url_for('atualizabanner', id=banner.id) }}">
+                    <i style="color: green;" class="fas fa-toggle-on"></i>
+                {% else %}
+                <a  href="{{ url_for('atualizabanner', id=banner.id) }}">
+                    <i style="color: red; -webkit-transform: rotate(180deg);" class="fas fa-toggle-on"></i>
+                </a>
+                {% endif %}
+            </td>
+            <td>
+                <a class="btn btn-danger btn-sm deletebtn" href="{{ url_for('deletebanner', id=banner.id) }}">
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                    </a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

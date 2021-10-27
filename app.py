@@ -70,11 +70,29 @@ class Profile(db.Model):
     def __str__(self):
         return self.name
 
+class Banner(db.Model):
+    __tablename__ = "banners"
+    id = db.Column(db.Integer, primary_key=True)
+    nome = db.Column(db.String(45), nullable=False)
+    image = db.Column(db.Unicode(124), nullable=False)
+    link = db.Column(db.String(255))
+    status = db.Column(db.Integer, default=True)
+
+    def __str__(self):
+        return self.nome
+
 @app.route("/")
 def index():
     users = User.query.all() # Select * from users; 
     cardapios = Cardapio.query.all()
-    return render_template("index.html", users=users, cardapios=cardapios)
+    banners = Banner.query.all()
+    active_banners = []
+    for banner in banners:
+        if banner.status == 1:
+            active_banners.append(banner)
+    nmr_banners_ativos = len(active_banners)
+
+    return render_template("index.html", users=users, cardapios=cardapios, banners=banners, nmr_banners_ativos=nmr_banners_ativos)
 
 @app.route('/cart/', methods=['POST', 'GET'])
 @app.route('/cart/<int:id>', methods=['POST', 'GET'])
@@ -165,6 +183,15 @@ def cadastros(tab='funcionarios'):
     cardapios = Cardapio.query.all() # Select * from users;  
     return render_template("cadastros.html", users=users, cardapios=cardapios, tab=tab)
 
+    
+    
+@app.route("/banners")
+@login_required
+def banners(): 
+    banners = Banner.query.all() # Select * from users;  
+    return render_template("banners.html", banners=banners)
+
+
 @app.route("/pedidos")
 @login_required
 def pedidos():
@@ -196,6 +223,14 @@ def delete(id):
 
     return redirect("/cadastros")
 
+@app.route("/deletebanner/<int:id>")
+def deletebanner(id):
+    banner = Banner.query.filter_by(id=id).first()
+    db.session.delete(banner)
+    db.session.commit()
+    return redirect("/banners")
+
+
 @app.route("/cardapio/delete/<int:id>")
 def delete_cardapio(id):
     cardapio = Cardapio.query.filter_by(id=id).first()
@@ -221,6 +256,28 @@ def register():
         return redirect(url_for("cadastros"))
 
     return render_template("cadastros.html")
+
+@app.route("/novobanner", methods=["GET", "POST"])
+def novobanner():
+    if request.method == "POST":
+        img = Banner()
+        img.nome = request.form['nome']
+        img.link = request.form['link']
+        img.status = request.form['status']
+        file = request.files['img']
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            img.image = filename
+            #print('upload_image filename: ' + filename)
+            flash('Upload realizado com sucesso')
+        else:
+            flash('Apenas permitimos os seguintes formatos: png, jpg, jpeg, gif')
+            return redirect(request.url)
+        
+        db.session.add(img)
+        db.session.commit()
+    return render_template("novo-banner.html")
 
 @app.route("/register_cardapio", methods=["GET", "POST"])
 def registerCardapio():
@@ -253,6 +310,17 @@ def atualizarcardapio(id):
     item = Cardapio.query.filter_by(id=id).first()
 
     return render_template("atualizar-produto.html", item=item) 
+
+@app.route("/update_banner/<int:id>", methods=["GET"])
+def atualizabanner(id):
+    item = Banner.query.filter_by(id=id).first()
+    if item.status == 1:
+        Banner.query.filter_by(id=id).update(dict(status=0))
+    else:
+        Banner.query.filter_by(id=id).update(dict(status=1))
+    db.session.flush()
+    db.session.commit()
+    return redirect('/banners')
 
 @app.route("/update_cardapio/<int:id>", methods=["POST"])
 def updatecardapio(id):
