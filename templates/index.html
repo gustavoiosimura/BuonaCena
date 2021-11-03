@@ -13,7 +13,7 @@
     {% for banner in banners %}
       {% if banner.status == 1 %}
       <div class="carousel-item active">
-        <a href="{{ banner.link }}"><img style="width:100%;" src="/uploads/{{ banner.image }}" class="d-block w-100" alt="..."></a>
+        <a href="{{ banner.link }}" target="_blank"><img style="width:100%;" src="/uploads/{{ banner.image }}" class="d-block w-100" alt="..."></a>
       </div>  
       {% endif %}
     {% endfor %}
