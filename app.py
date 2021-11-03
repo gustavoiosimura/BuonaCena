@@ -167,6 +167,8 @@ def delete_cart_item(id):
     session['carrinho'] = {'items':cartlist, 'total':valorTotal} # delete cart 
     return render_template('carrinho.html', cart=cart, total=session['carrinho']['total']) 
 
+
+
 @app.route('/delete-cart/')
 def delete_visits():
     cartlist = []
@@ -196,7 +198,7 @@ def banners():
 @login_required
 def pedidos():
     users = User.query.all() # Select * from users; 
-    return render_template("pedidos.html", users=users)    
+    return render_template("paginapedidos.html", users=users)    
 
 @app.route("/user/<int:id>")
 @login_required
