@@ -200,6 +200,10 @@ def pedidos():
     users = User.query.all() # Select * from users; 
     return render_template("paginapedidos.html", users=users)    
 
+@app.route("/finalizar-pedido")
+def finalizarpedido():
+    return render_template("finalizar-pedido.html")
+
 @app.route("/user/<int:id>")
 @login_required
 def unique(id):
