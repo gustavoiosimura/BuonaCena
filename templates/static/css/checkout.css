@@ -1,0 +1,31 @@
+.card {
+    width: 50%;
+    margin: 0 auto;
+    margin-top: 2em;
+    text-transform: uppercase;
+} 
+
+.card-body, .realizarPedido {
+    display: flex;
+    
+}
+.escolhaServico {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    margin: 1em !important;
+    border-radius: 4px !important;
+    margin-bottom: 6em !important;
+    background: rgba(196, 196, 196, 0.19);
+    cursor: pointer;
+}
+
+.card-title {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.tipoPedido {
+    
+}

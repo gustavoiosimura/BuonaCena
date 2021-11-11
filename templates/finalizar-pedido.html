@@ -1,4 +1,84 @@
 {% extends 'base_backoffice.html' %}
+
 {% block content %}
-AA
+
+<div class="card text-center tipoPedido justify-content-center">
+    <div class="card-header">
+      Tipo de pedido
+    </div>
+    <div class="card-body">
+      <div class="col-sm escolhaServico justify-content-center align-items-center" data-toggle="" data-target="" data-dismiss="">Retirar no balcão</div>
+      <div class="col-sm escolhaServico justify-content-center align-items-center" data-toggle="">Entrega</div>
+    </div>
+</div>
+
+<div class="card text-center realizarPedido">
+    <div class="card-header">
+      Realizar pedido
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">pedido</h5>
+      <ul class="lista">
+        <li>1x Penne al pesto trapanese; | <button type="button" class="removerItem">Remover</button></li>
+        <li>1x Ravióli de Brie e Damasco; | <button type="button" class="removerItem">Remover</button></li>
+        <li>2x Tiramisú; | <button type="button" class="removerItem">Remover</button></li>
+        <li>1x Coca-Cola; | <button type="button" class="removerItem">Remover</button></li>
+        <li>1x Suco de laranja; | <button type="button" class="removerItem">Remover</button></li>
+      </ul>
+    </div>
+    <a href="#" class="maisItens d-flex flex-column justify-content-center align-items-center">Adicionar mais itens</a>
+    <div class="col-sm blocoRetirar">
+        <p class="quemRetira">Quem irá retirar</p>
+    </div>
+    <form>
+        <div class="row dados">
+            <div class="col-sm nome">
+                <div class="form-group">
+                <label for="recipient-name" class="col-form-label name" >Nome completo*</label>
+                <input type="text" class="form-control" id="recipient-name" placeholder="Ex: Gabriela Rocha Santos" style="box-shadow: none; outline: none; border-radius: 0;" required>
+                </div>
+            </div>
+        </div>
+        <div class="row dados">
+            <div class="col-sm e-mail">
+                <div class="form-group">
+                <label for="recipient-name" class="col-form-label email">E-mail*</label>
+                <input type="text" class="form-control" id="recipient-name" placeholder="Ex: gabrielarocha@meuemail.com" style="box-shadow: none; outline: none; border-radius: 0;" required>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <div class="card-footer text-muted">
+        <a href="#" class="btn btn-primary">Visitar</a>
+    </div>    
+</div>
+
+
+<div class="card text-center tipoPedido">
+    <div class="card-header">
+        <span class="tiposPedidos" style="height: 36px;">Tipo de pedido: Balcão <br>
+            Buonna Cena</span>
+        <i class="fas fa-search lupaPesquisa"></i>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-sm opcoesPedidos pb-5">
+              <p class="pedido">Pedido</p><br>
+              <ul>
+                <li>1x Penne al pesto trapanese;</li>
+                <li>1x Ravióli de Brie e Damasco;</li>
+                <li>2x Tiramisú; </li>
+                <li>1x Coca-Cola;</li>
+                <li>1x Suco de laranja;</li>
+              </ul>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer text-muted">
+      2 dias atrás
+    </div>
+  </div>
+
+
 {% endblock %}
