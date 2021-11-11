@@ -1,14 +1,17 @@
 .card {
     width: 50%;
     margin: 0 auto;
-    margin-top: 2em;
-    text-transform: uppercase;
+    margin-top: 2em;    
 } 
+
+.titulo-tipoServico, .titulo-realizarPedido, .titulo, .quemRetira, .maisItens, .nPedidoFinalizado {
+    text-transform: uppercase;
+}
 
 .card-body, .realizarPedido {
     display: flex;
-    
 }
+
 .escolhaServico {
     display: flex;
     flex-wrap: wrap;
@@ -26,6 +29,151 @@
     flex-wrap: wrap;
 }
 
-.tipoPedido {
+/* segunda tela  */
+.listaProdutosFinalizados {
+    margin-top: 3em;
+    text-align: left;
+    margin-left: -4em; 
     
+}
+.removerItem {
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    outline: none !important;
+}
+.maisItens:active, .maisItens:hover,.removerItem:hover, .removerItem:active, .escolhaServico:hover, .escolhaServico:active, .escolhaServico:hover, .escolhaServico:active  {
+    text-decoration: none;
+    color: rgba(0, 0, 0, 0.7);
+    text-decoration: none;
+}
+.nomeCompleto {
+    margin-left: -30em;
+    margin-bottom: 0 !important;
+}
+.email {
+    margin-left: -34em;
+    margin-bottom: 0 !important;
+}
+
+input {
+    box-shadow: 0 0 0 0 !important;
+    border: 0 !important;
+}
+
+.quemRetira {
+    text-align: left;
+}  
+
+.botaoProsseguir {
+    background: rgba(43, 136, 10, 0.58);
+    border-radius: 5px;
+    width: 30%;
+    text-transform: uppercase;
+    color: #EDE9E9;
+    text-decoration: none;
+    box-shadow: none !important;
+    border-color: rgba(43, 136, 10, 0.58);
+    align-items: center !important;
+    margin-bottom: 1em;
+   
+}
+.botaoProsseguir:hover, .botaoProsseguir:active {
+    color: rgba(107, 106, 95, 0.6);
+    border-color: rgba(43, 136, 10, 0.58);
+}
+
+/* terceira tela - finalizar pedido */
+i.fas.fa-search.lupaPesquisa {
+    position: absolute;
+    font-size: 24px !important;
+    top: 1.2em;
+    left: 1em !important;
+}
+span.tiposPedidos {
+    margin-left: -22em!important;
+    padding: 0;
+    opacity: 0.6;
+}
+
+.itens {
+    width: 100%;
+}
+
+li.list-group-item {
+    border-left: 0;
+    border-right: 0; 
+}
+.sTotal, .toTal, .pagamento {
+    text-align: left;
+}
+.subValor, .valorTotal  {
+    margin-right: -40em !important;
+}
+
+.cupom {
+    margin-top: -1.9em;
+    margin-left: 1.5em;
+    text-transform: uppercase;
+    text-align: left;
+}
+
+.icones {
+   margin-left: -38em;
+}
+
+.cpf {
+    margin-left: -27em;
+}
+.botaoProsseguirFinalizar {
+    background: rgba(43, 136, 10, 0.58);
+    border-radius: 5px;
+    width: 30%;
+    text-transform: uppercase;
+    color: #EDE9E9;
+    text-decoration: none;
+    box-shadow: none !important;
+    border-color: rgba(43, 136, 10, 0.58);
+    align-items: center !important;
+    margin-bottom: 0.5em;
+    margin-top: 0.5em;
+}
+.botaoProsseguirFinalizar:hover, .botaoProsseguirFinalizar:active {
+    color: rgba(107, 106, 95, 0.6);
+    border-color: rgba(43, 136, 10, 0.58);
+}
+
+.botaoVoltar {
+    background: FireBrick;
+    border-radius: 5px;
+    width: 30%;
+    text-transform: uppercase;
+    color: #EDE9E9;
+    text-decoration: none;
+    box-shadow: none !important;
+    border-color: rgba(43, 136, 10, 0.58);
+    align-items: center !important;
+    margin-bottom: 0.5em;
+    margin-top: 0.5em;
+}
+.botaoVoltar:hover, .botaoVoltar:active {
+    color: rgba(107, 106, 95, 0.6);
+    border-color: darkred;
+}
+
+/* Quarta tela - número do pedido */
+.nPedido, .numeroPedido {
+    padding: 0 !important;
+    margin: 0 !important;
+    flex-direction: row;
+}
+
+.cardNumeroPFinalizado {
+    background: rgba(196, 196, 196, 0.39);
+    margin-bottom: 3em;
+    border-radius: 5px;
+    max-width: 18rem;
+    height: 10rem !important;
+    margin-top: 4em;
+    margin-bottom: 4em;
 }
