@@ -1,0 +1,62 @@
+{% extends 'base_backoffice.html' %}
+
+{% block content %}
+<link rel="stylesheet" href="/css/checkout.css">
+<div class="card pedidos text-center" id="realizarPedidoBalcao" style="padding-bottom: 20px;">
+  <div class="card-header titulo-realizarPedido">
+    Verificar pedido
+  </div>
+  <div class="card-body">
+    <table style="height:100px;overflow:auto;" class="table">
+      <thead> 
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Prato</th>
+          <th scope="col">Preço</th>  
+        </tr>
+      </thead>
+      <tbody>
+        
+        {% if cart %}
+        {% for produto in cart %}
+        <tr>
+          <th scope="col">{{ produto.id }}</th>
+          <th scope="col">{{ produto.nome }}</th>
+          <th scope="col">
+            {% if produto.promocional %}
+              R$ {{ produto.promocional }}
+              <del>R$ {{ produto.valor}}</del>
+            {% else %}
+              R$ {{ produto.valor}}
+            {% endif %}
+          </th>  
+        </tr>
+        {% endfor %}
+        {% endif %}
+      </tbody> 
+      <tbody> 
+        <tr>
+          <th scope="col">Subtotal:</th>
+          <th scope="col">{{ "R${:,.2f}".format(total)  }}</th>
+          <th scope="col"></th> 
+        </tr> 
+      </tbody>
+    </table> 
+  </div> 
+  <a href="/"><button type="button" class="btn btn-warning" data-toggle="" data-target="" data-dismiss="modal">Voltar ao cardápio</button></a>
+</div>
+<!-- Primeira tela - tipo de serviço -->
+<div class="card text-center tipoPedido justify-content-center" id="escolhaTipoServico" style="margin-bottom:50px;">
+    <div class="card-header titulo-tipoServico">
+      Tipo de pedido
+    </div>
+    <div class="card-body">
+      <div class="col-sm escolhaServico justify-content-center align-items-center" data-toggle="" data-target="" data-dismiss=""><a href="/checkout/retirar" style="text-decoration: none; color: grey;">Retirar no balcão</a></div> 
+      <div class="col-sm escolhaServico justify-content-center align-items-center" data-toggle=""><a href="/checkout/entrega" style="text-decoration: none; color: grey;">Entrega</a></div>
+    </div>
+</div>
+
+
+ 
+
+{% endblock %}

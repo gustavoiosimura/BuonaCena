@@ -1,0 +1,78 @@
+{% extends 'base_backoffice.html' %}
+
+{% block content %}
+<link rel="stylesheet" href="/css/checkout.css">
+<style>
+    .table td, .table th {
+    padding: 0.75rem;
+    vertical-align: top;
+    border-top: 1px solid #dee2e6;
+    text-align: left;
+}
+    @import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@500&family=M+PLUS+1+Code&display=swap');
+    </style>
+<div class="card pedidos text-center" id="realizarPedidoBalcao" style=";color:black;margin-bottom:50px;font-family:'Inconsolata', monospace;padding-bottom: 20px;background-color: #fffaeb;">
+  <div class="card-header titulo-realizarPedido">
+    Recibo <b>#{{numero}}</b>
+  </div>
+  <div class="card-body">
+    <table style="height:100px;overflow:auto;" class="table">
+      <thead> 
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Prato</th>
+          <th scope="col">Preço</th>  
+        </tr>
+      </thead>
+      <tbody>
+        
+        {% if cart %}
+        {% for produto in cart %}
+        <tr>
+          <th scope="col">{{ produto.id }}</th>
+          <th scope="col">{{ produto.nome }}</th>
+          <th scope="col">
+            {% if produto.promocional %}
+              R$ {{ produto.promocional }}
+              <del>R$ {{ produto.valor}}</del>
+            {% else %}
+              R$ {{ produto.valor}}
+            {% endif %}
+          </th>  
+        </tr>
+        {% endfor %}
+        {% endif %}
+      </tbody> 
+      <tbody> 
+        <tr>
+          <th scope="col">Subtotal:</th>
+          <th scope="col">{{ "R${:,.2f}".format(subtotal)  }}</th>
+          <th scope="col"></th> 
+        </tr> 
+        <tr>
+            <th scope="col">Total:</th>
+            <th scope="col">{{ "R${:,.2f}".format(total)  }}</th>
+            <th scope="col"></th> 
+          </tr>
+          <tr>
+            <th scope="col">Metodo de Pagamento:</th>
+            <th scope="col">{{ metodoPgto  }}</th>
+            <th scope="col"></th> 
+          </tr> 
+          <tr>
+            <th scope="col">Tipo pedido:</th>
+            <th scope="col">{{ tipo  }}</th>
+            <th scope="col"></th> 
+          </tr>
+          {% if tipo == 'entrega' %}   
+          <tr>
+            <td scope="col">Endereço:</td>
+            <td colspan="2" scope="col">{{endereco}}</td> 
+          </tr>
+          {% endif %}
+ 
+      </tbody>
+    </table> 
+  </div> 
+</div>
+{% endblock %}

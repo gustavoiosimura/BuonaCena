@@ -1,0 +1,161 @@
+{% extends 'base_backoffice.html' %}
+
+{% block content %}
+<link rel="stylesheet" href="/css/checkout.css">
+<div class="card pedidos text-center" id="realizarPedidoBalcao" >
+  <div class="card-header titulo-realizarPedido">
+    Verificar pedido
+  </div>
+  <div class="card-body">
+    <table style="height:100px;overflow:auto;" class="table">
+      <thead> 
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Prato</th>
+          <th scope="col">Preço</th>  
+        </tr>
+      </thead>
+      <tbody>
+        
+        {% if cart %}
+        {% for produto in cart %}
+        <tr>
+          <th scope="col">{{ produto.id }}</th>
+          <th scope="col">{{ produto.nome }}</th>
+          <th scope="col">
+            {% if produto.promocional %}
+              R$ {{ produto.promocional }}
+              <del>R$ {{ produto.valor}}</del>
+            {% else %}
+              R$ {{ produto.valor}}
+            {% endif %}
+          </th> 
+        </tr>
+        {% endfor %}
+        {% endif %}   
+      </tbody>  
+    </table> 
+  </div>  
+</div> 
+<form method="POST" action="{{ url_for('finalizarpedido') }}"> 
+<input type="hidden" class="form-control" name="tipo" value="balcão">
+<div class="card text-center" id="finalizarPedidoBalcao" style="margin-bottom:50px;">
+  <div class="card-header">
+    <div class="row">
+      <div class="col-3">
+        <img src="/img/restaurant.png" style="width:40px;text-align: left;margin-right: auto;display: block;">
+      </div>
+      <div class="col-6">
+        <span class="tiposPedidos" style="text-align: left;line-height: 2.5;">&nbsp;&nbsp;&nbsp; Identificação do cliente</span><br> 
+      </div>
+    </div> 
+  </div> 
+  <div>
+    <ul class="list-group list-group"> 
+      <li class="list-group-item"> 
+        <div class="row">
+          <div class="col-6">
+            <input type="text" class="form-control" name="nome" placeholder="Nome" maxlenght="30">
+          </div>
+          <div class="col-6">
+            <input type="text"class="form-control" name="sobrenome" placeholder="Sobrenome" maxlenght="30">
+          </div> 
+        </div> 
+        <!-- <div class="row">
+          <div class="col-6">
+            <input type="text" class="form-control" name="celular" placeholder="Celular" maxlenght="12" required>
+          </div>
+          <div class="col-6">
+            <input type="text"class="form-control" name="email" placeholder="Endereço de e-mail" maxlenght="86">
+          </div> 
+        </div> -->
+        <!--
+        <hr class="solid">
+        <div class="row">
+          <div class="col-5">
+            <input type="text"class="form-control" name="rua" placeholder="Rua" maxlenght="30">
+          </div>
+          <div class="col-3">
+            <input type="text"class="form-control" name="numero" placeholder="Número" maxlenght="5">
+          </div> 
+          <div class="col-4">
+            <input type="text"class="form-control" name="bairro" placeholder="Bairro" maxlenght="30">
+          </div> 
+        </div> 
+        <div class="row">
+          <div class="col-5">
+            <input type="text"class="form-control" name="cidade" value="São Paulo" maxlenght="30" readonly>
+          </div>
+          <div class="col-2">
+            <input type="text"class="form-control" name="uf" value="SP" maxlenght="30" readonly>
+          </div> 
+          <div class="col-5">
+            <input type="text"class="form-control" name="cep" placeholder="CEP" maxlenght="30" required>
+          </div> 
+        </div> --> 
+      </li>
+    </ul> 
+  </div>
+</div>
+
+<!-- terceira tela - finalizar pedido balcão -->
+<div class="card text-center" id="finalizarPedidoBalcao" style="margin-bottom:50px;">
+  <div class="card-header">
+    <div class="row">
+      <div class="col-3">
+        <img src="/img/restaurant.png" style="width:40px;text-align: left;margin-right: auto;display: block;">
+      </div>
+      <div class="col-6">
+        <span class="tiposPedidos" style="text-align: left;line-height: 2.5;">&nbsp;&nbsp;&nbsp; Informações de pagamento</span><br> 
+      </div>
+    </div> 
+  </div> 
+  <div>
+    <ul class="list-group list-group"> 
+      <li class="list-group-item">        
+        <h6 class="sTotal">Subtotal</h6>
+        <small class="subValor">{{ "R${:,.2f}".format(subtotal)  }}</small>
+        <input type="hidden" class="form-control" name="subtotal" value="{{ subtotal }}">
+      </li>
+      <li class="list-group-item">
+        <h6 class="toTal">Total</h6>
+        <small class="valorTotal">{{ "R${:,.2f}".format(total)  }}</small>
+        <input type="hidden" class="form-control" name="total" value="{{ total  }}">
+      </li> 
+      <select class="form-select" name="metodoPgto" aria-label="Default select example" style="height:50px;padding-left:15px;">
+        <option selected>Forma de pagamento</option>
+        <option value="dinheiro">Dinheiro</option>
+        <option value="cartao">Cartão Débito/Crédito</option> 
+      </select>
+      <li class="list-group-item"> 
+        <input id="cpf" type="text" class="form-control" name="cpf" placeholder="insira seu CPF (somente números)" maxlenght="14" oninput="formataCPF(this)" >
+        <script>
+          function formataCPF(cpf) {
+          const elementoAlvo = cpf
+          const cpfAtual = cpf.value   
+          
+          let cpfAtualizado;
+          
+          cpfAtualizado = cpfAtual.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, 
+           function( regex, argumento1, argumento2, argumento3, argumento4 ) {
+                  return argumento1 + '.' + argumento2 + '.' + argumento3 + '-' + argumento4;
+          })  
+          elementoAlvo.value = cpfAtualizado; 
+          }  
+          </script>
+      </li>
+    </ul> 
+    <input type="submit" class="btn botaoProsseguirFinalizar" data-toggle="" data-target="" value="Fazer pedido" data-dismiss=""> 
+  </div>
+</div>
+</form>
+  <!--  
+<div class="card text-center bg-light mb-3">
+  <div class="card-header nPedidoFinalizado">Pedido finalizado</div>
+  <div class="card cardNumeroPFinalizado">
+    <div class="card-body justify-content-center align-items-center">
+      <h5 class="card-title nPedido">Pedido<a class="numeroPedido" href="">#0349</a></h5>   
+    </div>
+  </div>
+</div> -->
+{% endblock %}

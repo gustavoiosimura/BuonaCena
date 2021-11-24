@@ -6,6 +6,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
 import urllib.request
 import os
+import random
 
 UPLOAD_FOLDER = '/templates/static/img'
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
@@ -77,9 +78,34 @@ class Banner(db.Model):
     image = db.Column(db.Unicode(124), nullable=False)
     link = db.Column(db.String(255))
     status = db.Column(db.Integer, default=True)
+    priority = db.Column(db.Boolean, default=False, nullable=False)
 
     def __str__(self):
         return self.nome
+
+class Pedido(db.Model):
+    __tablename__ = "pedidos"
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    numero_pedido = db.Column(db.String(86), nullable=False)
+    nome = db.Column(db.String(86), nullable=False)
+    telefone = db.Column(db.String(12), nullable=False)
+    email = db.Column(db.String(86), nullable=False)
+    cpf = db.Column(db.String(255), nullable=False)
+    endereco = db.Column(db.String(255), nullable=False)
+    tipo = db.Column(db.String(45), nullable=False)
+    subtotal = db.Column(db.DECIMAL(10,2), nullable=False)
+    total = db.Column(db.DECIMAL(10,2), nullable=False)
+    status = db.Column(db.String(25), nullable=False)
+    metodoPagamento = db.Column(db.String(25), nullable=False)
+
+    def __str__(self):
+        return self.id
+
+class item_pedido(db.Model):
+    __tablename__ = "itens_pedidos"
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    id_item = db.Column(db.Integer, nullable=False)
+    nmr_pedido = db.Column(db.String(25), nullable=False)
 
 @app.route("/")
 def index():
@@ -199,10 +225,6 @@ def banners():
 def pedidos():
     users = User.query.all() # Select * from users; 
     return render_template("paginapedidos.html", users=users)    
-
-@app.route("/finalizar-pedido")
-def finalizarpedido():
-    return render_template("finalizar-pedido.html")
 
 @app.route("/user/<int:id>")
 @login_required
@@ -443,6 +465,98 @@ def login():
 def logout():
     logout_user()
     return redirect(url_for("index"))
+
+@app.route("/checkout") 
+def checkout(): 
+    metacart = session['carrinho']
+    lista = session['carrinho']['items']
+    cart = []
+    if len(lista) == 0:
+        flash('Ops! Seu carrinho esta vazio.')
+        return render_template("carrinho.html")
+    for i in lista:
+        item_id = Cardapio.query.filter_by(id=i) 
+        item_id = Cardapio.query.filter_by(id=i).first()
+        item = item_id
+        cart.append(item) 
+    return render_template('checkout.html', cart=cart, total=session['carrinho']['total']) 
+
+@app.route("/checkout/entrega") 
+def entrega(): 
+    metacart = session['carrinho']
+    lista = session['carrinho']['items']
+    cart = []
+    taxaDeEntrega = 5
+    if len(lista) == 0:
+        flash('Ops! Seu carrinho esta vazio.')
+        return render_template("carrinho.html")
+    for i in lista:
+        item_id = Cardapio.query.filter_by(id=i) 
+        item_id = Cardapio.query.filter_by(id=i).first()
+        item = item_id
+        cart.append(item) 
+    return render_template('entrega.html', cart=cart, subtotal=session['carrinho']['total'], total=session['carrinho']['total']+taxaDeEntrega, taxaDeEntrega=taxaDeEntrega)
+
+
+@app.route("/checkout/retirar") 
+def retirar(): 
+    metacart = session['carrinho']
+    lista = session['carrinho']['items']
+    cart = []
+    #taxaDeEntrega = 5
+    if len(lista) == 0:
+        flash('Ops! Seu carrinho esta vazio.')
+        return render_template("carrinho.html")
+    for i in lista:
+        item_id = Cardapio.query.filter_by(id=i) 
+        item_id = Cardapio.query.filter_by(id=i).first()
+        item = item_id
+        cart.append(item) 
+    return render_template('retirar.html', cart=cart, subtotal=session['carrinho']['total'], total=session['carrinho']['total'])
+
+@app.route("/finalizarpedido", methods=["POST"]) 
+def finalizarpedido(): 
+    if request.method == 'POST':
+        numeroDoPedido = random.randint(1486,9999)
+        metacart = session['carrinho']
+        lista = session['carrinho']['items']
+        cart = []
+        if len(lista) == 0:
+            flash('Ops! Seu carrinho esta vazio.')
+            return render_template("carrinho.html")
+        for i in lista:
+            item_id = Cardapio.query.filter_by(id=i) 
+            item_id = Cardapio.query.filter_by(id=i).first()
+            item = item_id
+            cart.append(item) 
+            itempedido = item_pedido()
+            itempedido.id_item = item.id
+            itempedido.nmr_pedido =  numeroDoPedido
+            db.session.add(itempedido)
+            db.session.commit()
+        if request.form["tipo"] == 'entrega':
+            endereco = "{}, {}, {}, {} - {}, {}".format(request.form["rua"],request.form["numero"], request.form["bairro"],request.form["cidade"],request.form["uf"],request.form["cep"])
+        else:
+             endereco = "não aplicável"
+        pedido = Pedido()
+        pedido.numero_pedido = numeroDoPedido
+        pedido.nome = request.form["nome"]
+        if request.form["tipo"] == 'entrega':
+            pedido.telefone = request.form["celular"]
+            pedido.email = request.form["email"]
+        else:
+            pedido.telefone = 'não aplicável'
+            pedido.email = 'não aplicável'
+        pedido.cpf = request.form["cpf"]
+        pedido.endereco = endereco
+        pedido.tipo = request.form["tipo"]
+        pedido.subtotal = request.form["subtotal"]
+        pedido.total = request.form["total"]
+        pedido.status = 'pendente'
+        pedido.metodoPagamento = request.form["metodoPgto"]
+        db.session.add(pedido)
+        db.session.commit()
+    return render_template('finalizarpedido.html', cart=cart, subtotal=session['carrinho']['total'], total=session['carrinho']['total']+5, tipo = pedido.tipo,metodoPgto=pedido.metodoPagamento, endereco=pedido.endereco, numero = pedido.numero_pedido)  
 
 if __name__ == "__main__":
     app.run(debug=True)

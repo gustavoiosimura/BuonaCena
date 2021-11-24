@@ -7,12 +7,19 @@ body {
 .fa-cart-plus{
     cursor: pointer; 
 }
+
+.grid-container {
+    width: 32% !important;
+}
 @media screen and (max-width: 768px){
     .navut{
         margin-right: 1px !important;
     }
     .carticon{
         line-height: 42pt !important;
+    }
+    .grid-container {
+        width: 96% !important;
     }
     .navlogo{
         width:150px;
