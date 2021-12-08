@@ -1,4 +1,4 @@
-from datetime import timedelta
+from datetime import timedelta, datetime
 from flask import Flask, render_template, redirect, request, url_for, flash, session, make_response
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin, login_required, login_user, logout_user
@@ -97,6 +97,7 @@ class Pedido(db.Model):
     total = db.Column(db.DECIMAL(10,2), nullable=False)
     status = db.Column(db.String(25), nullable=False)
     metodoPagamento = db.Column(db.String(25), nullable=False)
+    datentime = db.Column(db.String(45), nullable=False)
 
     def __str__(self):
         return self.id
@@ -220,11 +221,18 @@ def banners():
     return render_template("banners.html", banners=banners)
 
 
-@app.route("/pedidos")
+@app.route("/pedidos", methods=['GET'])
+@app.route("/pedidos/<int:id>", methods=['GET'])
 @login_required
-def pedidos():
-    users = User.query.all() # Select * from users; 
-    return render_template("paginapedidos.html", users=users)    
+def pedidos(id=0):
+    if id==0:
+        pedido_selecionado = db.session.query(Pedido).order_by(Pedido.id.desc()).first() 
+        itens = db.session.query(item_pedido).order_by(item_pedido.nmr_pedido==pedido_selecionado.numero_pedido).first() 
+    else:
+        pedido_selecionado = Pedido.query.filter(Pedido.id==id).first()
+        itens = db.session.query(item_pedido).order_by(item_pedido.nmr_pedido==pedido_selecionado.numero_pedido).first() 
+    pedidos = Pedido.query.all() # Select * from users; 
+    return render_template("paginapedidos.html", pedidos=pedidos, pedido_selecionado=pedido_selecionado)    
 
 @app.route("/user/<int:id>")
 @login_required
@@ -544,9 +552,13 @@ def finalizarpedido():
         if request.form["tipo"] == 'entrega':
             pedido.telefone = request.form["celular"]
             pedido.email = request.form["email"]
+            entrega = datetime.now() + timedelta(hours=1)
+            entrega = entrega.strftime("%H:%M")
         else:
             pedido.telefone = 'não aplicável'
             pedido.email = 'não aplicável'
+            entrega = datetime.now() + timedelta(minutes=20)
+            entrega = entrega.strftime("%H:%M")
         pedido.cpf = request.form["cpf"]
         pedido.endereco = endereco
         pedido.tipo = request.form["tipo"]
@@ -554,9 +566,10 @@ def finalizarpedido():
         pedido.total = request.form["total"]
         pedido.status = 'pendente'
         pedido.metodoPagamento = request.form["metodoPgto"]
+        pedido.datentime = datetime.today()
         db.session.add(pedido)
         db.session.commit()
-    return render_template('finalizarpedido.html', cart=cart, subtotal=session['carrinho']['total'], total=session['carrinho']['total']+5, tipo = pedido.tipo,metodoPgto=pedido.metodoPagamento, endereco=pedido.endereco, numero = pedido.numero_pedido)  
+    return render_template('finalizarpedido.html', entrega=entrega,cart=cart, subtotal=session['carrinho']['total'], total=session['carrinho']['total']+5, tipo = pedido.tipo,metodoPgto=pedido.metodoPagamento, endereco=pedido.endereco, numero = pedido.numero_pedido)  
 
 if __name__ == "__main__":
     app.run(debug=True)

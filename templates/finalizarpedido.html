@@ -44,15 +44,13 @@
         {% endif %}
       </tbody> 
       <tbody> 
-        <tr>
-          <th scope="col">Subtotal:</th>
-          <th scope="col">{{ "R${:,.2f}".format(subtotal)  }}</th>
-          <th scope="col"></th> 
+        <tr> 
+          <th scope="col" colspan="2" style="text-align:right;">Subtotal:</th> 
+          <th scope="col">{{ "R${:,.2f}".format(subtotal)  }}</th> 
         </tr> 
         <tr>
-            <th scope="col">Total:</th>
-            <th scope="col">{{ "R${:,.2f}".format(total)  }}</th>
-            <th scope="col"></th> 
+            <th scope="col" colspan="2" style="text-align:right;">Total:</th> 
+            <th scope="col">{{ "R${:,.2f}".format(total)  }}</th> 
           </tr>
           <tr>
             <th scope="col">Metodo de Pagamento:</th>
@@ -70,7 +68,12 @@
             <td colspan="2" scope="col">{{endereco}}</td> 
           </tr>
           {% endif %}
- 
+          <tr>
+            <td colspan="3">
+              <center>O pedido será entregue até as:</center>
+              <center><b>{{entrega}}</b></center>
+            </td>
+          </tr>
       </tbody>
     </table> 
   </div> 

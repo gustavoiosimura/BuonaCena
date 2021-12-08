@@ -1,36 +1,65 @@
 {% extends 'base_backoffice.html' %}
 
 {% block content %}
+<style>
+  .tab{
+    width:75% !important;
+    margin-left:auto;
+    margin-right: auto;
+    display: block;
+
+  }
+  
+</style>
 <section>
+  <div class="row">
     <h1>PEDIDOS</h1>
+  <div class="col-6"> 
     <ul class="container">
-      <li>
-        <p><strong>Bruna</strong>
-          <span class="cor-2">DESPACHADO</span>
-          <p>Entregar até 12h29 - <span class="cor">#002</span></p>
-      </li>
+      {% for pedido in pedidos|reverse %}
+      <a style="text-decoration: none;color:inherit;" href="/pedidos/{{pedido.id}}">
+        <li class="tab">
+          <p><strong>{{pedido.nome}}</strong>
+            {% if pedido.status == 'entregue' %}
+              <span class="cor-2" style="text-transform: capitalize;position: relative; display: block;  margin-left: auto; margin-right: 10px; margin-top: 10px;">{{pedido.status}}</span>
+            {% elif pedido.status == 'a caminho' %}
+              <span class="cor-3" style="text-transform: capitalize;position: relative; display: block;  margin-left: auto; margin-right: 10px; margin-top: 10px;">{{pedido.status}}</span>
+            {% elif pedido.status == 'em preparo' %}
+              <span class="cor-1" style="text-transform: capitalize;position: relative; display: block;  margin-left: auto; margin-right: 10px; margin-top: 10px;">{{pedido.status}}</span>
+            {% elif pedido.status == 'pendente' %}
+              <span class="cor-4" style="text-transform: capitalize;position: relative; display: block;  margin-left: auto; margin-right: 10px; margin-top: 10px;">{{pedido.status}}</span>
+            {% endif %}
 
-        <li>
-          <p><strong>Gabriel</strong><span class="cor-3">ENTREGADOR A CAMINHO</span></p>
-          <p>Entregar até 12h50 - <span class="cor">#003</span></p>
-        </li>
+            
 
-        <li>
-          <p><strong>Manuela</strong><span class="cor-1">EM PREPARO</span></p>
-          <p>Entregar até 13h15 - <span class="cor">#004</span></p>
+            {% set entrega = pedido.datentime.split(' ') %}
+            {% set entrega = entrega[1].split(':') %}
+            {% set entrega = '{}h{}'.format(entrega[0],entrega[1]) %}
+            <p>Entregar até {{entrega}} - <span class="cor">#{{pedido.numero_pedido}} - {{pedido.tipo}}</span></p>
         </li>
-        
-        <li>
-          <p><strong>Lucas</strong><span class="cor-4">PENDENTE</span></p>
-          <p>Entregar até 13h38 - <span class="cor">#005</span></p>
-        </li>
-        <li>
-          <p><span class="cor-5">PENDENTE</span></p>
-          <p><strong class="titulo-pedido">PEDIDO #001</strong><br>
-          <p class="horario">Horário 12h10</p>
-          <p>Cliente<br>
-          Tiago
-          (11) 97122-1468 #268713</p>
+      </a>
+      {% endfor %}
+      </ul>
+    </div>
+      <div class="col-6" > 
+        <div style="border: 1px solid rgba(218, 193, 193, 0.81); padding: 25px; width:85%;">
+          {% if pedido_selecionado.status == 'entregue' %}
+              <span class="cor-2" style="text-transform: capitalize;position: relative !important; margin-left: auto; display: block; width: 70px; text-align: center;">{{pedido_selecionado.status}}</span>
+            {% elif pedido_selecionado.status == 'a caminho' %}
+              <span class="cor-3" style="text-transform: capitalize;position: relative !important; margin-left: auto; display: block; width: 80px; text-align: center;">{{pedido_selecionado.status}}</span>
+            {% elif pedido_selecionado.status == 'em preparo' %}
+              <span class="cor-1" style="text-transform: capitalize;position: relative !important; margin-left: auto; display: block; width: 90px; text-align: center;">{{pedido_selecionado.status}}</span>
+            {% elif pedido_selecionado.status == 'pendente' %}
+              <span class="cor-4" style="text-transform: capitalize;position: relative !important; margin-left: auto; display: block; width: 70px; text-align: center;">{{pedido_selecionado.status}}</span>
+            {% endif %}
+          <p><strong class="titulo-pedido">PEDIDO #{{pedido_selecionado.numero_pedido}}</strong><br>
+            {% set entrega = pedido_selecionado.datentime.split(' ') %}
+            {% set entrega = entrega[1].split(':') %}
+            {% set entrega = '{}h{}'.format(entrega[0],entrega[1]) %}
+          <p class="horario">Horário {{entrega}}</p>
+          <p>Cliente - <b>&nbsp;{{pedido_selecionado.tipo}}</b></p>
+          <p>
+          {{pedido_selecionado.nome}}&nbsp;-&nbsp;(11) 97122-1468</p>
           <p>Endereço de Entrega<br>
           Rua Amador Bueno, 35 - Perdizes - SP</p>
           <p>Itens do Pedido<br>
@@ -40,9 +69,9 @@
           1- Coca-Cola;<br>
           1- Suco de Laranja.
           </p>
-          <button class="botao">CONFIRMAR</button>
-        </li>
-      </ul>
+          <button class="botao" style="margin: 0px;">CONFIRMAR</button> 
+        </p>
+      </div>
       </div>
 </section>
 {% endblock %}
