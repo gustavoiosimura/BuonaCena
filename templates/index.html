@@ -3,6 +3,34 @@
 
 {% block content %}  
 {% if nmr_banners_ativos >= 1 %}
+<style>
+  .alert.alert-success {
+    width: 250px;
+    display: block;
+    position: fixed;
+    bottom: 10px;
+    text-align: center; 
+}
+.show {
+      -o-transition: opacity 3s;
+      -moz-transition: opacity 3s;
+      -webkit-transition: opacity 3s;
+      transition: opacity 3s;
+      opacity:1;
+  }
+  .hide {
+      opacity:0;
+  }
+</style>
+<script>
+   function ShowSecond() {
+    var div2 = document.getElementById("div2");
+    div2.className = "show";
+    setTimeout(function () {
+        div2.className = 'hide';
+    }, 2000);
+}
+</script>
 <div id="carouselExampleIndicators" style="width:100%;" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-inner">
     {% for banner in banners %}
@@ -68,7 +96,7 @@
                               R$ {{ cardapio.valor }}
                           {% endif %}
                         </div>  
-                        <div class="item5"><i onclick="addToCart({{ cardapio.id }})" class="fas fa-cart-plus"></i></div>  
+                        <div class="item5 show"><i onclick="addToCart({{ cardapio.id }});ShowSecond()" class="fas fa-cart-plus"></i></div>  
                       </div>
                     </div>
                   </div>
@@ -121,14 +149,18 @@
                               R$ {{ cardapio.valor }}
                           {% endif %}
                         </div>    
-                        <div class="item5"><i onclick="addToCart({{ cardapio.id }})" class="fas fa-cart-plus"></i></div>  
+                        <div class="item5"><i onclick="addToCart({{ cardapio.id }});ShowSecond()" class="fas fa-cart-plus show"></i></div>  
                       </div>
                     </div>
                   </div>
                   {% endfor %} 
             
                 </div>
-              </div>
-             
+              </div>  
+               
+            <div id="div2" class="alert alert-success hide" style="color: #0f5132;
+            background-color: #d1e7dd;
+            border-color: #badbcc;height: 50px; width: 250px;text-align:center;line-height:3;border-radius:10px;position: fixed; right:60%;left:40%;
+    bottom: 10px;">Adicionado ao carrinho!</div>
     <script type="text/javascript" src="js/script.js"></script>
     {% endblock %}
