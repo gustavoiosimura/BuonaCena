@@ -49,6 +49,7 @@
 </div>
  --> 
 {% endif %}
+<div class="cardapio">
             <h2>Pratos</h2>
             <div class="row"> 
                 {% for cardapio in cardapios if cardapio.tipo == "pratos" %} 
@@ -127,6 +128,7 @@
                   {% endfor %} 
             
                 </div>
+              </div>
              
     <script type="text/javascript" src="js/script.js"></script>
     {% endblock %}
