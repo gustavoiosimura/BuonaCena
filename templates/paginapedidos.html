@@ -15,7 +15,7 @@
   <div class="row">
     <h1>PEDIDOS</h1>
   <div class="col-6"> 
-    <ul class="container">
+    <ul class="container" style="height: 400px;overflow-y: scroll;">
       {% for pedido in pedidos|reverse %}
       <a style="text-decoration: none;color:inherit;" href="/pedidos/{{pedido.id}}">
         <li class="tab">
