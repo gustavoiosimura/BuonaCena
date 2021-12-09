@@ -59,17 +59,19 @@
           <p class="horario">Horário {{entrega}}</p>
           <p>Cliente - <b>&nbsp;{{pedido_selecionado.tipo}}</b></p>
           <p>
-          {{pedido_selecionado.nome}}&nbsp;-&nbsp;(11) 97122-1468</p>
+          {{pedido_selecionado.nome}}&nbsp;{% if pedido_selecionado.tipo == 'entrega' %}&nbsp;-&nbsp;{{pedido_selecionado.telefone}}{% endif %}</p>
+          {% if pedido_selecionado.tipo == 'entrega' %}
           <p>Endereço de Entrega<br>
-          Rua Amador Bueno, 35 - Perdizes - SP</p>
+          {{pedido_selecionado.endereco}}</p>
+          {% endif %}
           <p>Itens do Pedido<br>
-          1- Penne al pesto trapanese;<br>
-          1- Ravíoli de brie e damasco;<br>
-          2- Tiramisù;<br>
-          1- Coca-Cola;<br>
-          1- Suco de Laranja.
-          </p>
-          <button class="botao" style="margin: 0px;">CONFIRMAR</button> 
+            {% for item in itens_do_pedido %}
+            {{item['quantidade']}}x&nbsp;{{item['produto']}};<br> 
+            {% endfor %}
+          </p>  
+          {% if pedido_selecionado.status != 'entregue' %}
+          <a href="/atualizar/pedido/{{pedido_selecionado.id}}"><button class="botao" style="margin: 0px;">CONFIRMAR</button></a>
+          {% endif %} 
         </p>
       </div>
       </div>

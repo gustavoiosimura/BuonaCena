@@ -7,6 +7,8 @@ from werkzeug.utils import secure_filename
 import urllib.request
 import os
 import random
+import pytz
+
 
 UPLOAD_FOLDER = '/templates/static/img'
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
@@ -21,6 +23,10 @@ app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///app.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1000 * 1000
+
+UTC = pytz.utc
+
+IST = pytz.timezone('America/Sao_Paulo')
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
@@ -220,19 +226,49 @@ def banners():
     banners = Banner.query.all() # Select * from users;  
     return render_template("banners.html", banners=banners)
 
+@app.route("/atualizar/pedido/<int:id>")
+@login_required
+def atualizarpedido(id): 
+    pedido = Pedido.query.filter(Pedido.id == id).first()
+    if pedido.status == 'pendente':
+        novostatus = 'em preparo'
+    elif pedido.status == 'em preparo' and pedido.tipo == 'balcão': 
+        novostatus = 'entregue'
+    elif pedido.status == 'em preparo' and pedido.tipo == 'entrega': 
+        novostatus = 'a caminho'
+    elif pedido.status == 'a caminho':
+        novostatus = 'entregue'
+
+    Pedido.query.filter_by(id=id).update(dict(status=novostatus))
+    db.session.flush()
+    db.session.commit()
+    
+
+    return redirect(url_for('pedidos', id=id))
+
 
 @app.route("/pedidos", methods=['GET'])
 @app.route("/pedidos/<int:id>", methods=['GET'])
 @login_required
 def pedidos(id=0):
     if id==0:
-        pedido_selecionado = db.session.query(Pedido).order_by(Pedido.id.desc()).first() 
-        itens = db.session.query(item_pedido).order_by(item_pedido.nmr_pedido==pedido_selecionado.numero_pedido).first() 
+        pedido_selecionado = db.session.query(Pedido).order_by(Pedido.id.desc()).first()  
     else:
         pedido_selecionado = Pedido.query.filter(Pedido.id==id).first()
-        itens = db.session.query(item_pedido).order_by(item_pedido.nmr_pedido==pedido_selecionado.numero_pedido).first() 
+    itens = item_pedido.query.filter(item_pedido.nmr_pedido==pedido_selecionado.numero_pedido).all()
+    itens_do_pedido = []
+    for x in itens:
+        produto = Cardapio.query.filter(Cardapio.id == x.id_item).first()
+        if not any(d['id_produto'] == produto.id for d in itens_do_pedido):
+            item = {'id_produto': produto.id,'produto':produto.nome,'quantidade':1} 
+            itens_do_pedido.append(item)
+        else:
+            coleta = next((index for (index, d) in enumerate(itens_do_pedido) if d["id_produto"] == produto.id), None)
+            quantidade = itens_do_pedido[coleta]['quantidade'] + 1
+            itens_do_pedido[coleta]['quantidade'] = quantidade
+
     pedidos = Pedido.query.all() # Select * from users; 
-    return render_template("paginapedidos.html", pedidos=pedidos, pedido_selecionado=pedido_selecionado)    
+    return render_template("paginapedidos.html", pedidos=pedidos, pedido_selecionado=pedido_selecionado, itens_do_pedido=itens_do_pedido,itens=itens)    
 
 @app.route("/user/<int:id>")
 @login_required
