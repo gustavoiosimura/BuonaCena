@@ -6,8 +6,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
 import urllib.request
 import os
-import random
-import pytz
+import random 
 
 
 UPLOAD_FOLDER = '/templates/static/img'
@@ -23,10 +22,8 @@ app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///app.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1000 * 1000
-
-UTC = pytz.utc
-
-IST = pytz.timezone('America/Sao_Paulo')
+ 
+ 
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
@@ -39,6 +36,15 @@ login_manager = LoginManager(app)
 def current_user(user_id):
     return User.query.get(user_id)
 
+class Viagem(db.Model):
+    __tablename__ = "viagens"
+    id = db.Column(db.Integer, primary_key=True)
+    nome = db.Column(db.String(84), nullable=False)
+    destino = db.Column(db.String(84), nullable=False, unique=True, index=True)
+    valor = db.Column(db.String(255), nullable=False) 
+
+    def __str__(self):
+        return self.name
 
 class User(db.Model, UserMixin):
     __tablename__ = "users"
@@ -432,6 +438,20 @@ def atualizarfuncionario(id):
     funcionario = User.query.filter_by(id=id).first()
 
     return render_template("atualizar-funcionario.html", funcionario=funcionario) 
+
+@app.route("/receberdados", methods=["GET"])
+@app.route("/receberdados/<destino>/<nomecliente>/<valor>", methods=["POST"])
+def apireceberdados(destino=0,nomecliente=0,valor=0):
+    if request.method == "POST":
+        vg = Viagem()
+        vg.nome = nomecliente
+        vg.destino = destino
+        vg.valor = valor
+        db.session.add(vg)
+        db.session.commit()
+    viagens = Viagem.query.all()
+
+    return render_template("viagens.html", viagens=viagens) 
 
 @app.route("/update_funcionario/<int:id>", methods=["POST"])
 def updatefuncionario(id):
