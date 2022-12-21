@@ -1,2 +1,2 @@
 # BuonaCena
-Delivery app developed with Python/Flask for College final assignment.
+Delivery app built with Python/Flask for College final assignment.
