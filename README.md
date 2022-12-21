@@ -1,2 +1,2 @@
 # BuonaCena
-Trabalho OPE - Impacta
+Delivery app developed with Python/Flask for College final assignment.
